@@ -87,8 +87,9 @@ class CartCell: UITableViewCell {
         print("->", product.count)
         self.product = product
         nameLabel.text = product.name
-        descriptionLabel.update(key: product.detail ?? "", value: "\(product.size), \(product.dough), \n+\(product.ingredients ?? [])")
         
+        let value = product.type == "pizza" ? "\(product.size), \(product.dough), \n+\(product.ingredients ?? [])" : ""
+        descriptionLabel.update(key: product.detail ?? "", value: value)
         priceLabel.text = "\(product.price) р."
         photoImageView.image = UIImage(named: product.image)
         
