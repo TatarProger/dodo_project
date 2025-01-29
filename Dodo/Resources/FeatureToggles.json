@@ -1,0 +1,16 @@
+{
+  "features": [
+    {
+      "name": "X-101: Map",
+      "enabled": true
+    },
+    {
+      "name": "X-109: Cart",
+      "enabled": true
+    },
+    {
+      "name": "X-110: Profile",
+      "enabled": true
+    }
+  ]
+}

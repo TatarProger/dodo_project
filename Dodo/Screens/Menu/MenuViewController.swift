@@ -13,6 +13,7 @@ final class MenuViewController: UIViewController {
     private let categoryService: ICategoryService
     private let productService: IProductService
     let addressStorage = AddressStorage()
+    let featureToggleStorage = FeatureToggleStorage()
     
     init(productService: IProductService, categoryService: ICategoryService) {
         self.productService = productService
@@ -175,6 +176,7 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
                 cell.onButtonTapped2 = {
                     self.navigateToProfile()
                 }
+                cell.configure()
                 
                 return cell
             case .stories:

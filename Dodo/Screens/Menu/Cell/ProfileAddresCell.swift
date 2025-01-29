@@ -90,6 +90,31 @@ class ProfileAddresCell: UITableViewCell {
     func update(_ addressName: String) {
         addresButton.setTitle(addressName, for: .normal)
     }
+    
+    func configure() {
+        
+        if LocalFeatureToggles.isMapAvalibale && RemoteFeatureToggles.isMapAvailable {
+            addresButton.isHidden = false
+        }
+        else {
+            addresButton.isHidden = true
+        }
+        
+        if LocalFeatureToggles.isProfileAvalibale && LocalFeatureToggles.isProfileAvalibale {
+            profileButton.isHidden = false
+        }
+        else {
+            profileButton.isHidden = true
+        }
+        
+        
+//        if let profileConfig = buttons.first(where: { $0.name == "X-110: Profile" }) {
+//            profileButton.isHidden = !profileConfig.enabled
+//        }
+//        if let mapConfig = buttons.first(where: { $0.name == "X-101: Map" }) {
+//            addresButton.isHidden = !mapConfig.enabled
+//        }
+    }
 }
 
 extension ProfileAddresCell {
