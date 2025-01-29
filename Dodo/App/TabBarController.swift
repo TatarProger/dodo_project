@@ -7,6 +7,8 @@
 
 import UIKit
 class TabBarController: UITabBarController {
+    let featureToggleStorage = FeatureToggleStorage()
+    
     let menuViewController: MenuViewController = {
         let controller = di.screenFactory.makeMenuScreen()
         let tabItem = UITabBarItem(
@@ -24,6 +26,23 @@ class TabBarController: UITabBarController {
         controller.tabBarItem = tabItem
         return controller
     }()
+    
+    func tabbarListPick() {
+        if LocalFeatureToggles.isCartAvalibale && RemoteFeatureToggles.isCartAvailable {
+            viewControllers = [menuViewController, shoppingCartViewController]
+        }
+        else {
+            viewControllers = [menuViewController]
+        }
+        
+//        let featureList = featureToggleStorage.fetch()
+//        if featureList[1].enabled {
+//            viewControllers = [menuViewController, shoppingCartViewController]
+//        }
+//        else {
+//            viewControllers = [menuViewController]
+//        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,11 +52,17 @@ class TabBarController: UITabBarController {
         appearance.backgroundColor = .white
         appearance.stackedLayoutAppearance.normal.iconColor = .lightGray
         appearance.stackedLayoutAppearance.selected.iconColor = .black
-        
         tabBar.standardAppearance = appearance
-        viewControllers = [menuViewController, shoppingCartViewController]
+        tabbarListPick()
     }
 
 }
 
 
+extension TabBarController {
+    enum featureItems: CaseIterable {
+        case map
+        case cart
+        case profile
+    }
+}

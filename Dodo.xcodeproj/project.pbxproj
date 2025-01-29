@@ -29,6 +29,7 @@
 		A233A41B2CD827BC00D13520 /* AddressAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A233A41A2CD827BC00D13520 /* AddressAddViewController.swift */; };
 		A238B9532CC1716A0022DE92 /* CategoriesContainerHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A238B9522CC1716A0022DE92 /* CategoriesContainerHeader.swift */; };
 		A238DEA42CD64D8F001EA466 /* AddressPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A238DEA32CD64D8F001EA466 /* AddressPanelView.swift */; };
+		A24640FB2D37E0C500171728 /* RemoteFeatureToggles.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24640FA2D37E0C500171728 /* RemoteFeatureToggles.swift */; };
 		A24947552CD2CDDF00B714AC /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24947542CD2CDDF00B714AC /* LocationService.swift */; };
 		A24947572CD2D24100B714AC /* GeocodeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24947562CD2D24100B714AC /* GeocodeService.swift */; };
 		A249475A2CD37EEF00B714AC /* AddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24947592CD37EEF00B714AC /* AddressView.swift */; };
@@ -47,6 +48,12 @@
 		A27F92C52C8319E100FDCC4E /* StoriesContainerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27F92C42C8319E100FDCC4E /* StoriesContainerCell.swift */; };
 		A27F92C72C83274C00FDCC4E /* StoriesCell .swift in Sources */ = {isa = PBXBuildFile; fileRef = A27F92C62C83274C00FDCC4E /* StoriesCell .swift */; };
 		A299DDEB2CD0429D003C8102 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A299DDEA2CD0429D003C8102 /* MapViewController.swift */; };
+		A2A452602D2EAFA50097FF29 /* LocalFeatureToggles.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A4525F2D2EAFA50097FF29 /* LocalFeatureToggles.swift */; };
+		A2A452B42D3026B10097FF29 /* FeatureToggleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A452B32D3026B10097FF29 /* FeatureToggleViewController.swift */; };
+		A2A452B72D3029C00097FF29 /* FeatureToggleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A452B62D3029C00097FF29 /* FeatureToggleCell.swift */; };
+		A2A452BB2D302EF20097FF29 /* FeatureToggles.json in Resources */ = {isa = PBXBuildFile; fileRef = A2A452BA2D302EF10097FF29 /* FeatureToggles.json */; };
+		A2A452BD2D302F160097FF29 /* Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A452BC2D302F160097FF29 /* Feature.swift */; };
+		A2A452BF2D3043160097FF29 /* FeatureToggleStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A452BE2D3043160097FF29 /* FeatureToggleStorage.swift */; };
 		A2A48BE62C963C8B001A99FB /* MultiroundPro.otf in Resources */ = {isa = PBXBuildFile; fileRef = A2A48BE52C963C8B001A99FB /* MultiroundPro.otf */; };
 		A2A48BEA2C96DF5B001A99FB /* dodo-rounded.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A2A48BE92C96DF5B001A99FB /* dodo-rounded.ttf */; };
 		A2A48BEC2C970C05001A99FB /* microsoftsansserif.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A2A48BEB2C970C05001A99FB /* microsoftsansserif.ttf */; };
@@ -112,6 +119,7 @@
 		A233A41A2CD827BC00D13520 /* AddressAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressAddViewController.swift; sourceTree = "<group>"; };
 		A238B9522CC1716A0022DE92 /* CategoriesContainerHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesContainerHeader.swift; sourceTree = "<group>"; };
 		A238DEA32CD64D8F001EA466 /* AddressPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressPanelView.swift; sourceTree = "<group>"; };
+		A24640FA2D37E0C500171728 /* RemoteFeatureToggles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteFeatureToggles.swift; sourceTree = "<group>"; };
 		A24947542CD2CDDF00B714AC /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		A24947562CD2D24100B714AC /* GeocodeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeocodeService.swift; sourceTree = "<group>"; };
 		A24947592CD37EEF00B714AC /* AddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressView.swift; sourceTree = "<group>"; };
@@ -130,6 +138,12 @@
 		A27F92C42C8319E100FDCC4E /* StoriesContainerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesContainerCell.swift; sourceTree = "<group>"; };
 		A27F92C62C83274C00FDCC4E /* StoriesCell .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoriesCell .swift"; sourceTree = "<group>"; };
 		A299DDEA2CD0429D003C8102 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		A2A4525F2D2EAFA50097FF29 /* LocalFeatureToggles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalFeatureToggles.swift; sourceTree = "<group>"; };
+		A2A452B32D3026B10097FF29 /* FeatureToggleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureToggleViewController.swift; sourceTree = "<group>"; };
+		A2A452B62D3029C00097FF29 /* FeatureToggleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureToggleCell.swift; sourceTree = "<group>"; };
+		A2A452BA2D302EF10097FF29 /* FeatureToggles.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FeatureToggles.json; sourceTree = "<group>"; };
+		A2A452BC2D302F160097FF29 /* Feature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Feature.swift; sourceTree = "<group>"; };
+		A2A452BE2D3043160097FF29 /* FeatureToggleStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureToggleStorage.swift; sourceTree = "<group>"; };
 		A2A48BE52C963C8B001A99FB /* MultiroundPro.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MultiroundPro.otf; sourceTree = "<group>"; };
 		A2A48BE92C96DF5B001A99FB /* dodo-rounded.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "dodo-rounded.ttf"; sourceTree = "<group>"; };
 		A2A48BEB2C970C05001A99FB /* microsoftsansserif.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = microsoftsansserif.ttf; sourceTree = "<group>"; };
@@ -252,7 +266,6 @@
 				A273D5FC2C5FB42E0082B45F /* Components */,
 				A2E03FD82C94623D0006D43C /* Extensions */,
 				A273D6272C63A1D60082B45F /* Resources */,
-				A273D6332C6814DB0082B45F /* CustomStepper.swift */,
 			);
 			path = Dodo;
 			sourceTree = "<group>";
@@ -297,6 +310,7 @@
 		A273D5FC2C5FB42E0082B45F /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				A273D6332C6814DB0082B45F /* CustomStepper.swift */,
 				A2D95E2C2D09E67C00D05963 /* KeyValueLabel.swift */,
 				A273D5FD2C5FB4B00082B45F /* StackView.swift */,
 				A273D5F32C5FAF540082B45F /* Label.swift */,
@@ -310,6 +324,7 @@
 		A273D6212C63A1720082B45F /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				A2A452B22D30269B0097FF29 /* FeatureToggle */,
 				A273D6242C63A1A60082B45F /* Menu */,
 				A2C50ED42C88758F00804AF5 /* DetailProduct */,
 				A2D95E262D08FEBE00D05963 /* Profile */,
@@ -366,6 +381,9 @@
 				A24947542CD2CDDF00B714AC /* LocationService.swift */,
 				A24947562CD2D24100B714AC /* GeocodeService.swift */,
 				A233A4102CD7FB4D00D13520 /* AddressStorage.swift */,
+				A2A4525F2D2EAFA50097FF29 /* LocalFeatureToggles.swift */,
+				A2A452BE2D3043160097FF29 /* FeatureToggleStorage.swift */,
+				A24640FA2D37E0C500171728 /* RemoteFeatureToggles.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -377,6 +395,7 @@
 				A2AFC6342C8B2ABF000788D9 /* Ingredient.swift */,
 				A2AFC63E2C8B69DB000788D9 /* Category.swift */,
 				A233A4122CD801A100D13520 /* Address.swift */,
+				A2A452BC2D302F160097FF29 /* Feature.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -384,6 +403,7 @@
 		A273D6272C63A1D60082B45F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A2A452BA2D302EF10097FF29 /* FeatureToggles.json */,
 				A207117D2C5A712600431327 /* Main.storyboard */,
 				A2E03FDD2C94645F0006D43C /* Assets.xcassets */,
 				A20711822C5A712700431327 /* LaunchScreen.storyboard */,
@@ -410,6 +430,15 @@
 				A24947582CD37EB500B714AC /* Views */,
 			);
 			path = Map;
+			sourceTree = "<group>";
+		};
+		A2A452B22D30269B0097FF29 /* FeatureToggle */ = {
+			isa = PBXGroup;
+			children = (
+				A2A452B32D3026B10097FF29 /* FeatureToggleViewController.swift */,
+				A2A452B62D3029C00097FF29 /* FeatureToggleCell.swift */,
+			);
+			path = FeatureToggle;
 			sourceTree = "<group>";
 		};
 		A2A48BE32C9636B7001A99FB /* Fonts */ = {
@@ -546,6 +575,7 @@
 				A20711842C5A712700431327 /* Base in Resources */,
 				A2E03FDE2C94645F0006D43C /* Assets.xcassets in Resources */,
 				A2A48BEE2C970DA9001A99FB /* OpenSans-VariableFont_wdth,wght.ttf in Resources */,
+				A2A452BB2D302EF20097FF29 /* FeatureToggles.json in Resources */,
 				A207117F2C5A712600431327 /* Base in Resources */,
 				A2A48BEC2C970C05001A99FB /* microsoftsansserif.ttf in Resources */,
 				A2A48BEA2C96DF5B001A99FB /* dodo-rounded.ttf in Resources */,
@@ -583,6 +613,7 @@
 				A2F623DF2CF74E150077C84F /* UIView + shadow.swift in Sources */,
 				A2BDB2022CE8D7BB005CF2FD /* UITableView + dequeCell.swift in Sources */,
 				A2C816F52D184C22005D0C57 /* MissionsContainerCell.swift in Sources */,
+				A2A452602D2EAFA50097FF29 /* LocalFeatureToggles.swift in Sources */,
 				A2BDB2042CE8D7DE005CF2FD /* UITableViewCell + reuseId.swift in Sources */,
 				A2C50ED62C88769F00804AF5 /* PizzaIngredientsCell.swift in Sources */,
 				A2AFC6392C8B5C68000788D9 /* CategoriesContainerCell.swift in Sources */,
@@ -594,12 +625,14 @@
 				A22274832C7CB6B8009BEE7B /* BannersContainerCell.swift in Sources */,
 				A2C50ECD2C88603B00804AF5 /* PhotoProductCell.swift in Sources */,
 				A207117A2C5A712600431327 /* SceneDelegate.swift in Sources */,
+				A2A452BF2D3043160097FF29 /* FeatureToggleStorage.swift in Sources */,
 				A2D95E282D08FEED00D05963 /* ProfileViewController.swift in Sources */,
 				A249475C2CD383D200B714AC /* SaveButton.swift in Sources */,
 				A273D62E2C63AD310082B45F /* TabBarController.swift in Sources */,
 				A207118E2C5A85FA00431327 /* ProductService.swift in Sources */,
 				A273D5F42C5FAF540082B45F /* Label.swift in Sources */,
 				A2BDB2062CF295E1005CF2FD /* UITableView + dequeHeader.swift in Sources */,
+				A2A452BD2D302F160097FF29 /* Feature.swift in Sources */,
 				A22274852C7CBC1E009BEE7B /* BannerCollectionCell.swift in Sources */,
 				A2F623DD2CF74D300077C84F /* PromoCell.swift in Sources */,
 				A233A41B2CD827BC00D13520 /* AddressAddViewController.swift in Sources */,
@@ -607,6 +640,7 @@
 				A2BDB2082CF29712005CF2FD /* UITableViewHeaderFooterView + reuseId.swift in Sources */,
 				A2AFC63B2C8B5E6A000788D9 /* CategoryCell.swift in Sources */,
 				A233A4132CD801A100D13520 /* Address.swift in Sources */,
+				A2A452B42D3026B10097FF29 /* FeatureToggleViewController.swift in Sources */,
 				A273D5F82C5FB0DD0082B45F /* Button.swift in Sources */,
 				A299DDEB2CD0429D003C8102 /* MapViewController.swift in Sources */,
 				A2C50ECB2C885E4300804AF5 /* DetailProductController.swift in Sources */,
@@ -618,11 +652,13 @@
 				A2AD42BA2CA56AFD003E69AF /* CartPriceView.swift in Sources */,
 				A20711902C5A861A00431327 /* Product.swift in Sources */,
 				A2E03FD72C944E440006D43C /* ProductTitleView.swift in Sources */,
+				A2A452B72D3029C00097FF29 /* FeatureToggleCell.swift in Sources */,
 				A233A4162CD81A9C00D13520 /* AddressListViewController.swift in Sources */,
 				A2D95E2F2D0B5DD900D05963 /* PersonalDataCell.swift in Sources */,
 				A2D95E2D2D09E67C00D05963 /* KeyValueLabel.swift in Sources */,
 				A233A4112CD7FB4D00D13520 /* AddressStorage.swift in Sources */,
 				A2AFC63F2C8B69DB000788D9 /* Category.swift in Sources */,
+				A24640FB2D37E0C500171728 /* RemoteFeatureToggles.swift in Sources */,
 				75646A5D2CB692DD00403957 /* UIView+Borders.swift in Sources */,
 				A27F92C52C8319E100FDCC4E /* StoriesContainerCell.swift in Sources */,
 				A2AFC6372C8B2BB9000788D9 /* IngredientService.swift in Sources */,
@@ -780,7 +816,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Dodo/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -808,7 +844,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Dodo/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
