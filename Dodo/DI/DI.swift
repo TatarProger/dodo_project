@@ -16,6 +16,8 @@ class DI {
     let ingredientService: IngredientService
     let locationService: LocationService
     let geocodeService: GeocodeService
+    let addressStorage: AddressStorage
+    let featureToggleStorage: FeatureToggleStorage
     let screenFactory: ScreenFactory
     
     //locationService
@@ -36,6 +38,9 @@ class DI {
        
         geocodeService = GeocodeService()
         locationService = LocationService()
+        
+        addressStorage = AddressStorage()
+        featureToggleStorage = FeatureToggleStorage()
         
         screenFactory.di = self
         

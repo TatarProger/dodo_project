@@ -10,8 +10,8 @@ class ProfileAddresCell: UITableViewCell {
     
     static let reuseId = "ProfileAddresCell"
     
-    var onButtonTapped: (()->())?
-    var onButtonTapped2: (()->())?
+    var onAddressButtonTapped: (()->())?
+    var onProfileButtonTapped: (()->())?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -81,10 +81,10 @@ class ProfileAddresCell: UITableViewCell {
     }()
     
     @objc func transitToMap() {
-        onButtonTapped?()
+        onAddressButtonTapped?()
     }
     @objc func transitToAdd() {
-        onButtonTapped2?()
+        onProfileButtonTapped?()
     }
     
     func update(_ addressName: String) {

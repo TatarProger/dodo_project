@@ -6,7 +6,14 @@
 //
 
 import Foundation
-class FeatureToggleStorage {
+
+protocol IFeatureToggleStorage {
+    func fetch() -> [Feature]
+    func update(_ num: Int)
+    func publicSave(_ features: [Feature])
+}
+
+class FeatureToggleStorage: IFeatureToggleStorage {
     private let key = "Feature"
     
     private var userDefaults: UserDefaults
