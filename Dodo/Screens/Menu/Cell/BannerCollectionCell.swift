@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Kingfisher
+import Nuke
 class BannerCollectionCell: UICollectionViewCell {
     static let reusedId = "CollectionCell"
     
@@ -39,8 +41,15 @@ class BannerCollectionCell: UICollectionViewCell {
     func update(_ product: Product) {
         nameLabel.text = product.name
         priceButton.setTitle("\(product.price) р", for: .normal)
-        photoImageView.image = UIImage(named: product.image)
+        guard let url = URL(string: "https://i.postimg.cc/26GJBJNk/temp-Imagef7-TRHK.avif") else {return}
+//        photoImageView.kf.setImage(with: url)
+        
+        Task {
+            let imageTask = ImagePipeline.shared.imageTask(with: url)
+            photoImageView.image = try await imageTask.image
+        }
     }
+    
     
     
     override init(frame: CGRect) {

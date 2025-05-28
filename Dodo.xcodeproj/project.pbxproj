@@ -30,6 +30,8 @@
 		A238B9532CC1716A0022DE92 /* CategoriesContainerHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A238B9522CC1716A0022DE92 /* CategoriesContainerHeader.swift */; };
 		A238DEA42CD64D8F001EA466 /* AddressPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A238DEA32CD64D8F001EA466 /* AddressPanelView.swift */; };
 		A24640FB2D37E0C500171728 /* RemoteFeatureToggles.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24640FA2D37E0C500171728 /* RemoteFeatureToggles.swift */; };
+		A24641D92D5391AE00171728 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = A24641D82D5391AE00171728 /* Kingfisher */; };
+		A24641DC2D5397DE00171728 /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = A24641DB2D5397DE00171728 /* Nuke */; };
 		A24947552CD2CDDF00B714AC /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24947542CD2CDDF00B714AC /* LocationService.swift */; };
 		A24947572CD2D24100B714AC /* GeocodeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24947562CD2D24100B714AC /* GeocodeService.swift */; };
 		A249475A2CD37EEF00B714AC /* AddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24947592CD37EEF00B714AC /* AddressView.swift */; };
@@ -190,6 +192,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A24641DC2D5397DE00171728 /* Nuke in Frameworks */,
+				A24641D92D5391AE00171728 /* Kingfisher in Frameworks */,
 				751C02F42C6CF82C008598D2 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -525,6 +529,8 @@
 			name = Dodo;
 			packageProductDependencies = (
 				751C02F32C6CF82C008598D2 /* SnapKit */,
+				A24641D82D5391AE00171728 /* Kingfisher */,
+				A24641DB2D5397DE00171728 /* Nuke */,
 			);
 			productName = Dodo;
 			productReference = A20711742C5A712600431327 /* Dodo.app */;
@@ -556,6 +562,8 @@
 			mainGroup = A207116B2C5A712600431327;
 			packageReferences = (
 				751C02F22C6CF82C008598D2 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				A24641D72D5391AE00171728 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				A24641DA2D5397DE00171728 /* XCRemoteSwiftPackageReference "Nuke" */,
 			);
 			productRefGroup = A20711752C5A712600431327 /* Products */;
 			projectDirPath = "";
@@ -898,6 +906,22 @@
 				minimumVersion = 5.7.1;
 			};
 		};
+		A24641D72D5391AE00171728 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.2.0;
+			};
+		};
+		A24641DA2D5397DE00171728 /* XCRemoteSwiftPackageReference "Nuke" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kean/Nuke.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.8.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -905,6 +929,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 751C02F22C6CF82C008598D2 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		A24641D82D5391AE00171728 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A24641D72D5391AE00171728 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+		A24641DB2D5397DE00171728 /* Nuke */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A24641DA2D5397DE00171728 /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = Nuke;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
