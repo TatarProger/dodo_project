@@ -7,7 +7,15 @@
 
 import Foundation
 
-final class AddressStorage {
+protocol IAdressStorage {
+    func fetchDefaultAddress() -> String
+    func fetch() -> [Address]
+    func remove(_ address: Address)
+    func append(_ address: Address)
+    
+}
+
+final class AddressStorage: IAdressStorage {
     
     private let key = "AddressStorage"
     
@@ -25,7 +33,7 @@ final class AddressStorage {
 
 //MARK: Private
 extension AddressStorage {
-    func save(_ Addresses: [Address]) {
+    private func save(_ Addresses: [Address]) {
         do{
             let data = try encode.encode(Addresses)
             userDefaults.set(data, forKey: key)
