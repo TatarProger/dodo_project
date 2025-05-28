@@ -10,8 +10,6 @@ class FeatureToggleViewController: UIViewController {
     let localFeatureToggles = LocalFeatureToggles()
     let remoteFeatureToggles = RemoteFeatureToggles()
     let featureToggleStorage = FeatureToggleStorage()
-
-    
     var remoteFeatures:[Feature] = []
     var localFeatures:[Feature] = []
     
