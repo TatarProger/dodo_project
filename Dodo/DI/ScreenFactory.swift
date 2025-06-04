@@ -17,7 +17,14 @@ class ScreenFactory {
 
     func makeMenuScreen() -> MenuViewController {
         
-        let menuVC = MenuViewController(productService: di.productService, categoryService: di.categoryService, addressStorage: di.addressStorage, featureToggleStorage: di.featureToggleStorage)
+        let menuVC = MenuViewController()
+        let presenter = MenuPresenter.init(productService: di.productService, categoryService: di.categoryService, addressStorage: di.addressStorage, featureToggleStorage: di.featureToggleStorage)
+        
+        menuVC.presenter = presenter
+        presenter.view = menuVC
+        
+        
+
         return menuVC
     }
     
