@@ -50,6 +50,7 @@
 		A27F92C52C8319E100FDCC4E /* StoriesContainerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27F92C42C8319E100FDCC4E /* StoriesContainerCell.swift */; };
 		A27F92C72C83274C00FDCC4E /* StoriesCell .swift in Sources */ = {isa = PBXBuildFile; fileRef = A27F92C62C83274C00FDCC4E /* StoriesCell .swift */; };
 		A299DDEB2CD0429D003C8102 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A299DDEA2CD0429D003C8102 /* MapViewController.swift */; };
+		A29E0DD82DF067FC00ACE715 /* MenuPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29E0DD72DF067FC00ACE715 /* MenuPresenter.swift */; };
 		A2A452602D2EAFA50097FF29 /* LocalFeatureToggles.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A4525F2D2EAFA50097FF29 /* LocalFeatureToggles.swift */; };
 		A2A452B42D3026B10097FF29 /* FeatureToggleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A452B32D3026B10097FF29 /* FeatureToggleViewController.swift */; };
 		A2A452B72D3029C00097FF29 /* FeatureToggleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A452B62D3029C00097FF29 /* FeatureToggleCell.swift */; };
@@ -140,6 +141,7 @@
 		A27F92C42C8319E100FDCC4E /* StoriesContainerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesContainerCell.swift; sourceTree = "<group>"; };
 		A27F92C62C83274C00FDCC4E /* StoriesCell .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoriesCell .swift"; sourceTree = "<group>"; };
 		A299DDEA2CD0429D003C8102 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		A29E0DD72DF067FC00ACE715 /* MenuPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuPresenter.swift; sourceTree = "<group>"; };
 		A2A4525F2D2EAFA50097FF29 /* LocalFeatureToggles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalFeatureToggles.swift; sourceTree = "<group>"; };
 		A2A452B32D3026B10097FF29 /* FeatureToggleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureToggleViewController.swift; sourceTree = "<group>"; };
 		A2A452B62D3029C00097FF29 /* FeatureToggleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureToggleCell.swift; sourceTree = "<group>"; };
@@ -371,6 +373,7 @@
 			children = (
 				A207117B2C5A712600431327 /* MenuViewController.swift */,
 				A273D6222C63A18A0082B45F /* Cell */,
+				A29E0DD72DF067FC00ACE715 /* MenuPresenter.swift */,
 			);
 			path = Menu;
 			sourceTree = "<group>";
@@ -608,6 +611,7 @@
 				A2C50ED32C88727500804AF5 /* ProductComponentsCell.swift in Sources */,
 				A2D95E2B2D09C60C00D05963 /* PersonalDataContainerCell.swift in Sources */,
 				A273D5FE2C5FB4B00082B45F /* StackView.swift in Sources */,
+				A29E0DD82DF067FC00ACE715 /* MenuPresenter.swift in Sources */,
 				A207117C2C5A712600431327 /* MenuViewController.swift in Sources */,
 				A2C816F12D18042E005D0C57 /* PersonalOffersContainerCell.swift in Sources */,
 				A273D6322C63B91A0082B45F /* CartCell.swift in Sources */,
