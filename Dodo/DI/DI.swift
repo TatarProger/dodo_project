@@ -7,8 +7,7 @@
 
 import Foundation
 
-//Dependency Container
-class DI {
+final class DI {
     
     let productService: ProductsService
     let categoryService: CategoryService
@@ -19,31 +18,19 @@ class DI {
     let addressStorage: AddressStorage
     let featureToggleStorage: FeatureToggleStorage
     let screenFactory: ScreenFactory
-    
-    //locationService
-    //geolocationSerivce
-    //decoder
-    //urlSession
-    
+
     init() {
-        
-        screenFactory = ScreenFactory()
-        
-       
-        
         productService = ProductsService()
         categoryService = CategoryService()
         cartStorage = CartStorage()
         ingredientService = IngredientService()
-       
         geocodeService = GeocodeService()
         locationService = LocationService()
-        
         addressStorage = AddressStorage()
+        
         featureToggleStorage = FeatureToggleStorage()
-        
+
+        screenFactory = ScreenFactory()
         screenFactory.di = self
-        
-        
     }
 }

@@ -7,10 +7,7 @@
 
 import Foundation
 
-//DIP - dependency inversion principle (SOLID)
-
 protocol IProductService {
-    
     func fetchProducts(completion: @escaping((Result<[Product], Error>) -> Void))
 }
 

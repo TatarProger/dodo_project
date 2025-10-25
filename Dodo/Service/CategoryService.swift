@@ -10,7 +10,7 @@ import Foundation
 protocol ICategoryService {
     func fetchCategories(_ completion: @escaping ((Result<[Category], Error>)) -> Void)
 }
-class CategoryService:ICategoryService {
+class CategoryService: ICategoryService {
     
     func fetchCategories(_ completion: @escaping ((Result<[Category], Error>)) -> Void) {
         guard let url = URL(string: "\(Constants.baseURL)/categories") else {return}

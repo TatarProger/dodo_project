@@ -7,11 +7,6 @@
 
 import Foundation
 
-
-//if RemoteFeatureToggles.isMapAvailable {
-//
-//}
-
 class RemoteFeatureToggles {
     
     private static var remoteFeatures: [String: Feature] = [:]

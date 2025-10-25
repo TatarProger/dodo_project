@@ -6,10 +6,10 @@
 //
 
 import UIKit
-class CategoryCell: UICollectionViewCell {
+final class CategoryCell: UICollectionViewCell {
     static let reuseId = "CategoryCell"
     var onButtonTapped: (()->())?
-    let categoryButton: UIButton = {
+    private let categoryButton: UIButton = {
         let button = UIButton()
         button.setTitle("Пицца", for: .normal)
         button.titleLabel?.font = UIFont(name: "Dodo Rounded", size: 20)
@@ -39,11 +39,11 @@ class CategoryCell: UICollectionViewCell {
 }
 
 extension CategoryCell {
-    func setupViews() {
+    private func setupViews() {
         contentView.addSubview(categoryButton)
     }
     
-    func setupConstraints() {
+    private func setupConstraints() {
         categoryButton.snp.makeConstraints { make in
             make.edges.equalTo(contentView)
         }
