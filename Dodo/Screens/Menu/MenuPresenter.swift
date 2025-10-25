@@ -28,9 +28,6 @@ protocol IMenuPresenter {
 class MenuPresenter: IMenuPresenter {
     var view: IMenuViewController?
 
-  
-    
-    
     private let categoryService: ICategoryService
     private let productService: IProductService
     private let addressStorage: IAdressStorage

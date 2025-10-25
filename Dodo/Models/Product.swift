@@ -20,25 +20,6 @@ struct Product: Decodable, Encodable {
     let size: String
     let dough: String
     var ingredients: [Ingredient]? = []
-    
-    var increaseCount: Self {
-        let count = count + 1
-        return .init(id: id, name: name, count: count, detail: detail, price: price, image: image, type: type, isPromo: isPromo, size: size, dough: dough, ingredients: ingredients)
-    }
-    
-    var decreaseCount: Self {
-        let count = count - 1
-        return .init(id: id, name: name, count: count, detail: detail, price: price, image: image, type: type, isPromo: isPromo, size: size, dough: dough, ingredients: ingredients)
-    }
-    
-    func changeSize(_ newValue: String) -> Self {
-        return .init(id: id, name: name, count: count, detail: detail, price: price, image: image, type: type, isPromo: isPromo, size: newValue, dough: dough, ingredients: ingredients)
-    }
-    
-    func changeDough(_ newValue: String) -> Self {
-        return .init(id: id, name: name, count: count, detail: detail, price: price, image: image, type: type, isPromo: isPromo, size: size, dough: newValue, ingredients: ingredients)
-    }
-
 }
 
 extension Product: Equatable {
@@ -53,5 +34,25 @@ extension Product: Equatable {
         lhs.isPromo == rhs.isPromo &&
         lhs.size == rhs.size &&
         lhs.dough == rhs.dough
+    }
+}
+
+extension Product {
+    var increaseCount: Self {
+        let count = count + 1
+        return .init(id: id, name: name, count: count, detail: detail, price: price, image: image, type: type, isPromo: isPromo, size: size, dough: dough, ingredients: ingredients)
+    }
+
+    var decreaseCount: Self {
+        let count = count - 1
+        return .init(id: id, name: name, count: count, detail: detail, price: price, image: image, type: type, isPromo: isPromo, size: size, dough: dough, ingredients: ingredients)
+    }
+
+    func changeSize(_ newValue: String) -> Self {
+        return .init(id: id, name: name, count: count, detail: detail, price: price, image: image, type: type, isPromo: isPromo, size: newValue, dough: dough, ingredients: ingredients)
+    }
+
+    func changeDough(_ newValue: String) -> Self {
+        return .init(id: id, name: name, count: count, detail: detail, price: price, image: image, type: type, isPromo: isPromo, size: size, dough: newValue, ingredients: ingredients)
     }
 }
