@@ -7,14 +7,16 @@
 
 import Foundation
 
-struct Ingredient: Codable, CustomStringConvertible {
-    var imageName: String
-    var nameOfIngredient: String
-    var price: String
-    var isSelected: Bool
-    
+struct Ingredient: Codable {
+    let imageName: String
+    let nameOfIngredient: String
+    let price: String
+    let isSelected: Bool
+}
+
+extension Ingredient: CustomStringConvertible {
     var description: String {
-        return nameOfIngredient
+        "\(imageName), \(nameOfIngredient), \(price), \(isSelected)"
     }
 }
 
@@ -24,6 +26,10 @@ extension Ingredient: Equatable {
         lhs.nameOfIngredient == rhs.nameOfIngredient &&
         lhs.price == rhs.price
     }
-    
-     
+}
+
+extension Ingredient {
+    var selected: Self {
+        Ingredient(imageName: imageName, nameOfIngredient: nameOfIngredient, price: price, isSelected: !isSelected)
+    }
 }

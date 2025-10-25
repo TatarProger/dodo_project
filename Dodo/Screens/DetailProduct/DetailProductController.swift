@@ -113,7 +113,7 @@ extension DetailProductController {
         if let index = self.ingredients.firstIndex(where: { $0 == ingredient }) {
             
             var ingredient = self.ingredients[index]
-            ingredient.isSelected.toggle()
+            ingredient.selected
             
             self.product?.ingredients = []
 
