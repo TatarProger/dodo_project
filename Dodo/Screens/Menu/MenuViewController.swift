@@ -12,19 +12,14 @@ protocol IMenuViewController {
     var presenter: IMenuPresenter? {get set}
     
     func navigateToDetailScreen(_ product: Product)
-    
     func navigateToMapScreen()
-    
     func navigateToProfile()
     
     func scrollToRow(_ indexPath: IndexPath)
-    
 
-    
     func update(_ products: [Product])
     func update(_ categories: [Category])
     func update(_ address: String)
-    
 }
 
 final class MenuViewController: UIViewController, IMenuViewController {
@@ -139,7 +134,6 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
                 header.update(categories)
                 
                 header.onButtonTapped = { section in
-                    
                     self.categoryCellSelected(section)
                 }
                 return header
@@ -234,7 +228,6 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
 extension MenuViewController {
     
     private func productCellSelect(_ rowIndex: Int) {
-        print("cell selected")
         let product = products[rowIndex]
         presenter?.productCellSelect(product)
     }
@@ -252,7 +245,7 @@ extension MenuViewController {
     }
     
     private func categoryCellSelected(_ section: Int) {
-        var indexPath = IndexPath(row: section, section: 3)
+        let indexPath = IndexPath(row: section, section: 3)
         presenter?.categoryCellSelected(indexPath)
     }
     

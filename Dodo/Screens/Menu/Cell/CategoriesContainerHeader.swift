@@ -6,19 +6,17 @@
 //
 
 import UIKit
-class CategoriesContainerHeader: UITableViewHeaderFooterView {
+final class CategoriesContainerHeader: UITableViewHeaderFooterView {
     static let reuseId = "CategoriesContainerHeader"
     
     var onButtonTapped: ((Int)->())?
-    
-    //let categoryService = CategoryService()
-    var categories: [Category] = []{
+    private var categories: [Category] = []{
         didSet {
             collectionView.reloadData()
         }
     }
     
-    lazy var collectionView: UICollectionView = {
+    private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
@@ -32,11 +30,6 @@ class CategoriesContainerHeader: UITableViewHeaderFooterView {
         collection.heightAnchor.constraint(equalToConstant: 60).isActive = true
         return collection
     }()
-    
-    
-//    func fetchCategories(){
-//        categories = categoryService.fetchCategories()
-//    }
     
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
@@ -89,11 +82,11 @@ extension CategoriesContainerHeader: UICollectionViewDelegate, UICollectionViewD
 }
 
 extension CategoriesContainerHeader {
-    func setupViews() {
+    private func setupViews() {
         contentView.addSubview(collectionView)
     }
     
-    func setupConstraints() {
+    private func setupConstraints() {
         collectionView.snp.makeConstraints { make in
             make.edges.equalTo(contentView)
         }

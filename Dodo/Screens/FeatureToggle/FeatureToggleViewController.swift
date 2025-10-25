@@ -7,6 +7,7 @@
 
 import UIKit
 class FeatureToggleViewController: UIViewController {
+    
     let localFeatureToggles = LocalFeatureToggles()
     let remoteFeatureToggles = RemoteFeatureToggles()
     let featureToggleStorage = FeatureToggleStorage()

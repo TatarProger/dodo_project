@@ -8,6 +8,11 @@
 import UIKit
 import SnapKit
 
+protocol ICartViewController {
+    var presenter: ICartPresenter? { get set }
+    var additions: [Product] { get set }
+}
+
 class CartViewController: UIViewController {
 
     let cartStorage: ICartStorage
@@ -71,6 +76,11 @@ class CartViewController: UIViewController {
         fetchProductsFromStorage()
         fetchAdditionsFromApi()
     }
+    
+}
+
+//MARK: Event Handler
+extension CartViewController {
     
 }
 

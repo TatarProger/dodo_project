@@ -6,17 +6,17 @@
 //
 
 import UIKit
-class StoriesCell: UICollectionViewCell {
-    
+final class StoriesCell: UICollectionViewCell {
+
     static let reusedId = "StoriesCell"
     
-    let containerView: UIView = {
+    private let containerView: UIView = {
         let container = UIView()
         container.applyShadow(cornerRadius: 20)
         return container
     }()
     
-    let photoImageView: UIImageView = {
+    private let photoImageView: UIImageView = {
         let image = UIImageView()
         image.backgroundColor = .systemBackground
         image.image = UIImage(named: "newPackages")
@@ -25,7 +25,7 @@ class StoriesCell: UICollectionViewCell {
         return image
     }()
     
-    let nameLabel: UILabel = {
+    private let nameLabel: UILabel = {
         let label = UILabel()
         label.text = "Пицца"
         return label
@@ -44,13 +44,13 @@ class StoriesCell: UICollectionViewCell {
 
 
 extension StoriesCell {
-    func setupViews() {
+    private func setupViews() {
         contentView.addSubview(containerView)
         containerView.addSubview(photoImageView)
         containerView.addSubview(nameLabel)
     }
     
-    func setupConstraints() {
+    private func setupConstraints() {
         containerView.snp.makeConstraints { make in
             make.edges.equalTo(contentView).inset(10)
         }

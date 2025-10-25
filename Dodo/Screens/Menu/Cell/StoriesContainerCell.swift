@@ -7,12 +7,12 @@
 
 import UIKit
 
-class StoriesContainerCell: UITableViewCell {
-    
+final class StoriesContainerCell: UITableViewCell {
+
     static let reusedId = "StoriesContainerCell"
     
-    lazy var collectionView: UICollectionView = {
-        
+    private lazy var collectionView: UICollectionView = {
+
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.itemSize = CGSize(width: 125, height: 150)
@@ -51,11 +51,11 @@ extension StoriesContainerCell: UICollectionViewDataSource, UICollectionViewDele
 }
 
 extension StoriesContainerCell {
-    func setupViews() {
+    private func setupViews() {
         contentView.addSubview(collectionView)
     }
     
-    func setupConstraints() {
+    private func setupConstraints() {
         collectionView.snp.makeConstraints { make in
             make.edges.equalTo(contentView)
         }

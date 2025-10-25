@@ -6,11 +6,10 @@
 //
 
 import UIKit
-class BannersContainerCell: UITableViewCell {
-    
+final class BannersContainerCell: UITableViewCell {
+
     var onBannerSelected:((Product, Int) -> ())?
-    
-    let productService = ProductsService()
+
     var products: [Product] = []{
         didSet {
             someCollectionView.reloadData()
@@ -19,15 +18,14 @@ class BannersContainerCell: UITableViewCell {
     
     static let reusedId = "BannersContainerCell"
     
-    let label: UILabel = {
+    private let label: UILabel = {
         var label = UILabel()
         label.text = "Выгодно и вкусно"
-        //label.font = UIFont.boldSystemFont(ofSize: 20)
         label.font = UIFont(name: "Dodo Rounded", size: 20)
         return label
     }()
     
-    lazy var someCollectionView: UICollectionView = {
+    private lazy var someCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -82,12 +80,12 @@ extension BannersContainerCell: UICollectionViewDataSource, UICollectionViewDele
 }
 
 extension BannersContainerCell {
-    func setupViews() {
+    private func setupViews() {
         contentView.addSubview(someCollectionView)
         contentView.addSubview(label)
     }
     
-    func setupConstraints() {
+    private func setupConstraints() {
         someCollectionView.snp.makeConstraints { make in
             make.left.right.equalTo(contentView.safeAreaLayoutGuide)
             make.top.equalTo(label).offset(15)

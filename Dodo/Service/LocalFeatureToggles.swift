@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 class LocalFeatureToggles {
     
     private static var localFeatures: [String: Feature] = [:]
@@ -30,13 +31,10 @@ class LocalFeatureToggles {
     func update(_ feature: Feature) {
         LocalFeatureToggles.localFeatures[feature.name] = feature
     }
-    
-    
+
     // Метод для чтения файла JSON
     func load() -> [Feature] {
-        
-    
-    //func fetch<T: Codable>(filename: String, type: T.Type) -> T? {
+
         guard let url = Bundle.main.url(forResource: "FeatureToggles", withExtension: "json") else {
             print("Не удалось найти файл FeatureToggles.json")
             return []

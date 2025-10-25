@@ -8,10 +8,10 @@
 import UIKit
 import Kingfisher
 import Nuke
-class BannerCollectionCell: UICollectionViewCell {
+final class BannerCollectionCell: UICollectionViewCell {
     static let reusedId = "CollectionCell"
     
-    let photoImageView: UIImageView = {
+    private let photoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.widthAnchor.constraint(equalToConstant: 70).isActive = true
         imageView.heightAnchor.constraint(equalToConstant: 70).isActive = true
@@ -19,15 +19,14 @@ class BannerCollectionCell: UICollectionViewCell {
         return imageView
     }()
     
-    let nameLabel: UILabel = {
+    private let nameLabel: UILabel = {
         let label = UILabel()
         label.text = "Пеперони"
         label.font = UIFont(name: "Dodo Rounded", size: 15)
-        //label.font = UIFont.boldSystemFont(ofSize: 15)
         return label
     }()
     
-    let priceButton: UIButton = {
+    private let priceButton: UIButton = {
         let button = UIButton()
         button.setTitle("500р", for: .normal)
         button.backgroundColor = .orange.withAlphaComponent(0.1)
@@ -42,7 +41,6 @@ class BannerCollectionCell: UICollectionViewCell {
         nameLabel.text = product.name
         priceButton.setTitle("\(product.price) р", for: .normal)
         guard let url = URL(string: "https://i.postimg.cc/26GJBJNk/temp-Imagef7-TRHK.avif") else {return}
-//        photoImageView.kf.setImage(with: url)
         
         Task {
             let imageTask = ImagePipeline.shared.imageTask(with: url)
@@ -50,8 +48,7 @@ class BannerCollectionCell: UICollectionViewCell {
         }
     }
     
-    
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -62,7 +59,7 @@ class BannerCollectionCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupViews() {
+    private func setupViews() {
         contentView.backgroundColor = .systemBackground
         contentView.layer.cornerRadius = 20
         contentView.applyShadow(cornerRadius: 20)
@@ -70,7 +67,7 @@ class BannerCollectionCell: UICollectionViewCell {
         contentView.addSubview(nameLabel)
         contentView.addSubview(priceButton)
     }
-    func setupConstraints() {
+    private func setupConstraints() {
         
         photoImageView.snp.makeConstraints { make in
             make.left.equalTo(contentView).offset(10)
