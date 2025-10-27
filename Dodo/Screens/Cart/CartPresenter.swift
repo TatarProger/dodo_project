@@ -14,20 +14,20 @@ protocol ICartPresenter {
 class CartPresenter: ICartPresenter {
     var view: (any ICartViewController)?
     
-    let cartStorage: ICartStorage
-    let productService: IProductService
-    
+    private let cartStorage: ICartStorage
+    private let productService: IProductService
+
     init(cartStorage: ICartStorage, productService: IProductService) {
         self.cartStorage = cartStorage
         self.productService = productService
     }
 }
 
-
 //MARK: - Business Logic
 extension CartPresenter {
     func fetchAdditionsFromApi() {
-        productService.fetchProducts { result in
+        productService.fetchProducts { [weak self] result in
+            guard let self else { return }
             switch result {
             case .success(let products):
                 self.view?.additions = products

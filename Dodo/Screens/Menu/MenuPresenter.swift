@@ -84,9 +84,7 @@ extension MenuPresenter {
         categoryService.fetchCategories { [weak self] result in
             switch result {
             case .success(let categories):
-                
                 self?.view?.update(categories)
-                //self.categories = category
             case .failure(let error):
                 print(error)
                 
@@ -99,7 +97,6 @@ extension MenuPresenter {
             switch result {
                 
             case .success(let products):
-                //self.products = product
                 self.view?.update(products)
             case .failure(let error):
                 print(error)

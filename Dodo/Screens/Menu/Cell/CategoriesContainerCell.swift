@@ -13,7 +13,7 @@ final class CategoriesContainerCell: UITableViewCell {
     
     var onButtonTapped: ((Int)->())?
 
-    var categories: [Category] = []{
+    private var categories: [Category] = []{
         didSet {
             collectionView.reloadData()
         }
@@ -86,11 +86,11 @@ extension CategoriesContainerCell: UICollectionViewDelegate, UICollectionViewDat
 }
 
 extension CategoriesContainerCell {
-    func setupViews() {
+    private func setupViews() {
         contentView.addSubview(collectionView)
     }
     
-    func setupConstraints() {
+    private func setupConstraints() {
         collectionView.snp.makeConstraints { make in
             make.edges.equalTo(contentView)
         }

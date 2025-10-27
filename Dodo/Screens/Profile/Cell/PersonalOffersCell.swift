@@ -9,7 +9,7 @@ import UIKit
 class PersonalOffersCell: UICollectionViewCell {
     static let reuseId = "PersonalOffersCell"
     
-    let applyButton: UIButton = {
+    private let applyButton: UIButton = {
         let button = UIButton()
         button.setTitle("Применить", for: .normal)
         button.backgroundColor = .orange
@@ -32,13 +32,13 @@ class PersonalOffersCell: UICollectionViewCell {
 }
 
 extension PersonalOffersCell {
-    func setupViews() {
+    private func setupViews() {
         contentView.backgroundColor = .black
         contentView.layer.cornerRadius = 15
         contentView.addSubview(applyButton)
     }
     
-    func setupConstraints() {
+    private func setupConstraints() {
         applyButton.snp.makeConstraints { make in
             make.bottom.equalTo(contentView).inset(10)
             make.left.equalTo(contentView).inset(10)

@@ -9,14 +9,14 @@ import UIKit
 class PersonalDataCell: UICollectionViewCell {
     static let reuseId = "PersonalDataCell"
     
-    let stackView: UIStackView = {
+    private let stackView: UIStackView = {
         let stack = UIStackView()
         stack.backgroundColor = .gray.withAlphaComponent(0.6)
         stack.layer.cornerRadius = 10
         return stack
     }()
     
-    let nameLabel: UILabel = {
+    private let nameLabel: UILabel = {
         let text = UILabel()
         text.text = "dodocoins"
         text.textColor = .white
@@ -36,14 +36,14 @@ class PersonalDataCell: UICollectionViewCell {
 }
 
 extension PersonalDataCell {
-    func setupViews() {
+    private func setupViews() {
         contentView.backgroundColor = .purple
         contentView.layer.cornerRadius = 18
         contentView.addSubview(stackView)
         stackView.addSubview(nameLabel)
     }
     
-    func setupConstraints() {
+    private func setupConstraints() {
         stackView.snp.makeConstraints { make in
             make.bottom.equalTo(contentView).inset(10)
             make.left.equalTo(contentView).inset(10)

@@ -9,8 +9,6 @@ import UIKit
 
 
 class PhotoProductCell: UITableViewCell {
-
-    //static let reuseId = "PhotoProductCell"
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -19,7 +17,7 @@ class PhotoProductCell: UITableViewCell {
     }
     
     
-    let photoImageView: UIImageView = {
+    private let photoImageView: UIImageView = {
         let photo = UIImageView()
         photo.image = UIImage(named: "margarita")
         photo.contentMode = .scaleAspectFit
@@ -42,12 +40,12 @@ class PhotoProductCell: UITableViewCell {
 
 
 extension PhotoProductCell {
-    func setupViews() {
+    private func setupViews() {
         selectionStyle = .none
         contentView.addSubview(photoImageView)
     }
     
-    func setupConstraints() {
+    private func setupConstraints() {
         photoImageView.snp.makeConstraints { make in
             make.centerX.centerY.equalTo(contentView)
             make.centerY.equalTo(self).multipliedBy(1.1)

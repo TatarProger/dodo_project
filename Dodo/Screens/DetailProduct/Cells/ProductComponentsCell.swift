@@ -10,14 +10,14 @@ class ProductComponentsCell: UITableViewCell {
     //static let reuseId = "ProductComponentsCell"
     
     
-    let containerView: UIView = {
+    private let containerView: UIView = {
         let container = UIView()
         container.layer.cornerRadius = 20
         container.backgroundColor = .lightGray.withAlphaComponent(0.2)
         return container
     }()
     
-    let descriptionComponentsLabel: UILabel = {
+    private let descriptionComponentsLabel: UILabel = {
         let label = UILabel()
         label.text = "30 см, традиционное тесто 30, 470 г Моцарелла, сыры чеддер и пармезан, фирменный соус альфредо"
         label.font = UIFont(name: "Open Sans", size: 18)
@@ -39,7 +39,6 @@ class ProductComponentsCell: UITableViewCell {
     }
     
     func update(_ product: Product?) {
-        
         descriptionComponentsLabel.text = product?.detail ?? ""
     }
 }
@@ -48,13 +47,13 @@ class ProductComponentsCell: UITableViewCell {
 
 
 extension ProductComponentsCell {
-    func setupViews() {
+    private func setupViews() {
         selectionStyle = .none
         contentView.addSubview(containerView)
         containerView.addSubview(descriptionComponentsLabel)
     }
     
-    func setupConstraints() {
+    private func setupConstraints() {
         containerView.snp.makeConstraints { make in
             make.edges.equalTo(contentView).inset(20)
         }

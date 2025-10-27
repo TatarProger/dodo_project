@@ -7,28 +7,24 @@
 
 import UIKit
 
-class AddressListViewController: UIViewController {
-    
-    let addressStorage = AddressStorage()
-    
-    var addresses: [Address] = [] {
+final class AddressListViewController: UIViewController {
+
+    private let addressStorage = AddressStorage()
+
+    private var addresses: [Address] = [] {
         didSet {
             addressTableView.reloadData()
         }
     }
     
-    lazy var addressTableView: UITableView = {
+    private lazy var addressTableView: UITableView = {
         let table = UITableView()
         table.delegate = self
         table.dataSource = self
-//        table.register(AddressesCell.self, forCellReuseIdentifier: AddressesCell.reuseId)
         table.registerCell(AddressesCell.self)
         return table
     }()
-    
-    
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -36,12 +32,10 @@ class AddressListViewController: UIViewController {
         fetchAdresses()
     }
     
-    func fetchAdresses() {
+    private func fetchAdresses() {
         addresses = addressStorage.fetch()
     }
 }
-
-
 
 extension AddressListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -49,23 +43,19 @@ extension AddressListViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        guard let cell = addressTableView.dequeueReusableCell(withIdentifier: AddressesCell.reuseId, for: indexPath) as? AddressesCell else { return UITableViewCell()}
         let cell = addressTableView.dequeuCell(indexPath) as AddressesCell
         cell.update(address: addresses[indexPath.row])
         return cell
     }
-    
-    
 }
 
-
 extension AddressListViewController {
-    func setupViews() {
+    private func setupViews() {
         view.backgroundColor = .systemBackground
         view.addSubview(addressTableView)
     }
     
-    func setupConstraints() {
+    private func setupConstraints() {
         addressTableView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
