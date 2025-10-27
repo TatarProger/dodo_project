@@ -11,14 +11,14 @@ class AdditionsCollectionCell: UICollectionViewCell {
     
     static let reuseId = "AdditionsCollectionViewCell "
     
-    let containerView: UIView = {
+    private let containerView: UIView = {
         let container = UIView()
         container.backgroundColor = .white
         container.applyShadow(cornerRadius: 20)
         return container
     }()
     
-    let mainImageView: UIImageView = {
+    private let mainImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .clear
         imageView.contentMode = .scaleAspectFit
@@ -29,7 +29,7 @@ class AdditionsCollectionCell: UICollectionViewCell {
         return imageView
     }()
     
-    let nameLabel: UILabel = {
+    private let nameLabel: UILabel = {
         let label = UILabel()
         label.text = "name"
         label.font = UIFont(name: "Dodo Rounded", size: 20)
@@ -37,10 +37,9 @@ class AdditionsCollectionCell: UICollectionViewCell {
         label.lineBreakMode = .byWordWrapping
         return label
     }()
-    
-    
-    let priceButton: UIButton = {
-        
+
+    private let priceButton: UIButton = {
+
         var configuration = UIButton.Configuration.filled()
         configuration.contentInsets = NSDirectionalEdgeInsets(top: 6, leading: 6, bottom: 6, trailing: 6)
         configuration.cornerStyle = .capsule
@@ -69,20 +68,16 @@ class AdditionsCollectionCell: UICollectionViewCell {
     }
 }
 
-
 //MARK: LAYOUT
 extension AdditionsCollectionCell {
-    
-    
-    
-    func setupViews() {
+    private func setupViews() {
         contentView.addSubview(containerView)
         containerView.addSubview(mainImageView)
         containerView.addSubview(nameLabel)
         containerView.addSubview(priceButton)
     }
     
-    func setupConstraints() {
+    private func setupConstraints() {
         containerView.snp.makeConstraints { make in
             make.left.right.equalTo(contentView).inset(10)
             make.top.equalTo(contentView).offset(60)
@@ -103,8 +98,5 @@ extension AdditionsCollectionCell {
             make.bottom.equalTo(containerView).inset(10)
 
         }
-        
-
     }
-    
 }

@@ -199,15 +199,9 @@ extension CartViewController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if self.lastContentOffset < scrollView.contentOffset.y {
-            // did move up
             cartLabelCell.update(scrollValue: scrollView.contentOffset.y)
-            //print("-> up", scrollView.contentOffset.y)
         } else if self.lastContentOffset > scrollView.contentOffset.y {
-            // did move down
             cartLabelCell.update(scrollValue: scrollView.contentOffset.y)
-            //print("-> down", scrollView.contentOffset.y)
-        } else {
-            // didn't move
         }
     }
 }
@@ -215,7 +209,8 @@ extension CartViewController: UIScrollViewDelegate {
 //MARK: Business Logic
 extension CartViewController {
     private func fetchAdditionsFromApi() {
-        productService.fetchProducts { result in
+        productService.fetchProducts { [weak self] result in
+            guard let self else { return }
             switch result {
             case .success(let products):
                 self.additions = products

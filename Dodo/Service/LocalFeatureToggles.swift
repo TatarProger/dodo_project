@@ -48,7 +48,6 @@ class LocalFeatureToggles {
                 LocalFeatureToggles.localFeatures[item.name] = item
             }
             
-            //return response.features
             return LocalFeatureToggles.localFeatures.values.sorted(by: {$0.name < $1.name})
         } catch {
             print("Ошибка при парсинге JSON: \(error)")

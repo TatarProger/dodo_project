@@ -13,19 +13,18 @@ class FeatureToggleCell: UITableViewCell {
     
     static let reuseId = "FeatureToggleCell"
     
-    
-    let featureLabel: UILabel = {
+    private let featureLabel: UILabel = {
         let label = UILabel()
         return label
     }()
     
-    let switchLocalFeatureToggle: UISwitch = {
+    private let switchLocalFeatureToggle: UISwitch = {
        let toggle = UISwitch()
         toggle.addTarget(nil, action: #selector(switchIsToggle), for: .valueChanged)
         return toggle
     }()
     
-    let switchRemoteFeatureToggle: UISwitch = {
+    private let switchRemoteFeatureToggle: UISwitch = {
         let toggle = UISwitch()
         return toggle
     }()
@@ -47,20 +46,21 @@ class FeatureToggleCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    @objc func switchIsToggle() {
-        guard var feature = feature else {return}
+    @objc
+    private func switchIsToggle() {
+        guard let feature else { return }
         onSwitch?(feature.toggleEnabled)
     }
 }
 
 extension FeatureToggleCell {
-    func setupViews() {
+    private func setupViews() {
         contentView.addSubview(featureLabel)
         contentView.addSubview(switchLocalFeatureToggle)
     }
     
-    func setupConstraints() {
-        
+    private func setupConstraints() {
+
         featureLabel.snp.makeConstraints { make in
             make.left.equalTo(contentView).inset(10)
             make.bottom.top.equalTo(contentView).inset(10)

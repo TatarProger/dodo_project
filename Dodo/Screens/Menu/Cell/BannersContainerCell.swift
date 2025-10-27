@@ -10,7 +10,7 @@ final class BannersContainerCell: UITableViewCell {
 
     var onBannerSelected:((Product, Int) -> ())?
 
-    var products: [Product] = []{
+    private var products: [Product] = []{
         didSet {
             someCollectionView.reloadData()
         }

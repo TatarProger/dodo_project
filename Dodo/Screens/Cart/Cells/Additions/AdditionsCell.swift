@@ -14,17 +14,16 @@ class AdditionsCell: UITableViewCell {
     
     var onAdditionCellSelected: ((Product, Int) -> ())?
     
-    var products: [Product] = [] {
+    private var products: [Product] = [] {
         didSet {
             collectionView.reloadData()
         }
     }
     
-    lazy var collectionView: UICollectionView = { 
+    private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.itemSize = CGSize(width: 150, height: 270)
-        //super.init(frame: .zero, collectionViewLayout: layout)
         
         let collectionView = UICollectionView.init(frame: .zero, collectionViewLayout: layout)
         
@@ -36,7 +35,7 @@ class AdditionsCell: UITableViewCell {
         return collectionView
     }()
     
-    let questionLabel: UILabel = {
+    private let questionLabel: UILabel = {
        let label = UILabel()
         label.text = "Добавить к заказу?"
         label.font = UIFont.boldSystemFont(ofSize: 20)
@@ -53,17 +52,16 @@ class AdditionsCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
 }
 
 extension AdditionsCell {
-    func setupViews() {
+    private func setupViews() {
         selectionStyle = .none
         contentView.addSubview(collectionView)
         contentView.addSubview(questionLabel)
     }
-    func setupConstraints() {
+
+    private func setupConstraints() {
         questionLabel.snp.makeConstraints { make in
             make.top.equalTo(contentView).offset(20)
             make.right.equalTo(contentView)
@@ -102,6 +100,4 @@ extension AdditionsCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.onAdditionCellSelected?(products[indexPath.row], indexPath.row)
     }
-    
-    
 }

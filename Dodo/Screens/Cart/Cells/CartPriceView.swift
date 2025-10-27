@@ -8,13 +8,13 @@
 import UIKit
 class CartPriceView: UIView {
     
-    let containerView: UIView = {
+    private let containerView: UIView = {
         let view = UIView()
         view.addBlur(style: .light)
         return view
     }()
     
-    var cartLabel: UILabel = {
+    private var cartLabel: UILabel = {
         let label = UILabel()
         label.text = "Корзина"
         label.font = UIFont.boldSystemFont(ofSize: 18)
@@ -42,12 +42,12 @@ class CartPriceView: UIView {
 
 //MARK: LAYOUT
 extension CartPriceView {
-    func setupViews() {
+    private func setupViews() {
         self.addSubview(containerView)
         containerView.addSubview(cartLabel)
     }
     
-    func setupConstraints() {
+    private func setupConstraints() {
         containerView.snp.makeConstraints { make in
             make.edges.equalTo(self)
         }

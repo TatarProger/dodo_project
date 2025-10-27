@@ -7,10 +7,7 @@
 
 import UIKit
 class PersonalDataContainerCell: UITableViewCell {
-    
-    
-    
-    lazy var collectionView: UICollectionView = {
+    private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 25
@@ -53,14 +50,12 @@ extension PersonalDataContainerCell: UICollectionViewDelegate, UICollectionViewD
     
 }
 
-
-
 extension PersonalDataContainerCell {
-    func setupViews() {
+    private func setupViews() {
         contentView.addSubview(collectionView)
     }
     
-    func setupConstraints() {
+    private func setupConstraints() {
         collectionView.snp.makeConstraints { make in
             make.edges.equalTo(contentView)
         }

@@ -175,10 +175,6 @@ extension MapViewController: MKMapViewDelegate {
             self?.addressPanelView.update(addressText: addressText)
         }
     }
-    
-//    func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
-//        let center = mapView.centerCoordinate
-//    }
 }
 
 //MARK: Layout

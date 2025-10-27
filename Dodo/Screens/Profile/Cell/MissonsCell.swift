@@ -9,7 +9,7 @@ import UIKit
 class MissonsCell: UICollectionViewCell {
     static let reuseId = "MissonsCell"
     
-    let startButton: UIButton = {
+    private let startButton: UIButton = {
         let button = UIButton()
         button.setTitle("Приступим", for: .normal)
         button.backgroundColor = .orange
@@ -29,13 +29,13 @@ class MissonsCell: UICollectionViewCell {
 }
 
 extension MissonsCell {
-    func setupViews() {
+    private func setupViews() {
         contentView.backgroundColor = .black
         contentView.layer.cornerRadius = 15
         contentView.addSubview(startButton)
     }
     
-    func setupConstraints() {
+    private func setupConstraints() {
         startButton.snp.makeConstraints { make in
             make.left.right.bottom.equalTo(contentView).inset(5)
         }
