@@ -11,7 +11,6 @@ import UIKit
 class CartCell: UITableViewCell {
     static let reuseId = "CartCell"
     let keyValueLabel = KeyValueLabel()
-    //let cartStorage = CartStorage()
     
     var onProductCountIncrease: ((Product)->())?
     var onProductCountDecrease: ((Product)->())?
@@ -60,15 +59,6 @@ class CartCell: UITableViewCell {
     }()
     
     let descriptionLabel = KeyValueLabel()
-    
-//    let descriptionLabel: UILabel = {
-//       let labelView = UILabel()
-//        
-//        labelView.text = ""
-//        labelView.translatesAutoresizingMaskIntoConstraints = false
-//        labelView.numberOfLines = 0
-//        return labelView
-//    }()
     
     let priceLabel: UILabel = {
         let label = UILabel()
@@ -145,7 +135,6 @@ extension CartCell {
         
         photoImageView.snp.makeConstraints { make in
             make.top.left.equalTo(containerView).offset(15)
-            //make.left.equalTo(contentView).offset(20)
         }
  
         nameLabel.snp.makeConstraints { make in

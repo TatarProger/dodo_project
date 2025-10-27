@@ -10,18 +10,30 @@ import MapKit
 import CoreLocation
 import SnapKit
 
-class MapViewController: UIViewController {
-    var bottomConstraint: NSLayoutConstraint?
-    var originalConstant: CGFloat = 0
+final class MapViewController: UIViewController {
+    private var bottomConstraint: NSLayoutConstraint?
+    private var originalConstant: CGFloat = 0
+
+    private let locationService: ILocationService
+    private let geocodeService: IGeocodeService
+    private let addressStorage: IAdressStorage
+    private let addressPanelView = AddressPanelView()
+
+    private var address: Address?
+
+    init(locationService: ILocationService, geocodeService: IGeocodeService, addressStorage: IAdressStorage) {
+        self.locationService = locationService
+        self.geocodeService = geocodeService
+        self.addressStorage = addressStorage
+
+        super.init(nibName: nil, bundle: nil)
+    }
     
-    var locationService = LocationService()
-    var geocodeService = GeocodeService()
-    let addressStorage = AddressStorage()
-    let addressPanelView = AddressPanelView()
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
-    var address: Address?
-    
-    var pinImageView: UIImageView = {
+    private var pinImageView: UIImageView = {
         var imageView =  UIImageView()
         imageView.image = UIImage(named: "pin")
         imageView.contentMode = .scaleAspectFill
@@ -31,9 +43,7 @@ class MapViewController: UIViewController {
         return imageView
     }()
     
-
-    
-    let closeButton: UIButton = {
+    private let closeButton: UIButton = {
         let button = UIButton(type: .system)
         let configuration = UIImage.SymbolConfiguration(pointSize: 20)
         button.setImage(UIImage(systemName: "xmark", withConfiguration: configuration), for: .normal)
@@ -48,15 +58,13 @@ class MapViewController: UIViewController {
         return button
     }()
     
-    lazy var mapView: MKMapView = {
+    private lazy var mapView: MKMapView = {
         var mapView = MKMapView()
         mapView.delegate = self
         
         return mapView
     }()
-    
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -65,137 +73,125 @@ class MapViewController: UIViewController {
         
         showCurrentLocationOnMap()
         observe()
-        transitToAddAddress()
     }
-    
+}
+
+//MARK: Event Handler
+extension MapViewController {
     @objc func closeButtonTapped() {
         self.dismiss(animated: true)
     }
-    
+}
+
+//MARK: Navigation Logic
+extension MapViewController {
     @objc func navigateToAddressScreen() {
-        
+
         let addressController = AddressListViewController()
         if let presentationController = addressController.presentationController as? UISheetPresentationController {
             presentationController.detents = [.medium()]
         }
-        
         present(addressController, animated: true)
     }
-    
 
-
+    func navigateToAddAddress() {
+        let addController = AddressAddViewController()
+        present(addController, animated: true)
+    }
 }
+
 
 //MARK: Observe Logic
 extension MapViewController {
     func observe() {
-        
-        
-        addressPanelView.onSaveButtonTapped = {
-            
+        addressPanelView.onSaveButtonTapped = { [weak self] in
+            guard let self else { return }
             guard let address = self.address else { return }
-            print("SaveButton tapped ->", address)
             self.addressStorage.append(address)
-            
         }
         
         addressPanelView.onAddressChanged = { [weak self] addressText in
-            guard let self else {return}
+            guard let self else { return }
             self.showAddressOnMap(addressText)
-            
         }
+
+        addressPanelView.onAddressButtonTapped = { [weak self] in
+            guard let self else { return }
+            self.navigateToAddAddress()
+        }
+    }
+}
+
+//MARK: Display Logic
+extension MapViewController {
+    func showLocationOnMap(_ location: CLLocation) {
+        let regionRadius: CLLocationDistance = 500.0
+        let region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
+        mapView.setRegion(region, animated: true)
     }
 }
 
 //MARK: Business Logic
 extension MapViewController {
     func fetchAddressFromLocation(_ location: CLLocation, completion: @escaping (String) -> (Void)) {
-        
-       
-        
-        self.geocodeService.fetchAddressFromLocation(location) { addressText in
+        self.geocodeService.fetchAddressFromLocation(location) { [weak self] addressText in
+            guard let self else { return }
             completion(addressText)
             
-            self.geocodeService.fetchAddressFromLocation(location) { address in
+            self.geocodeService.fetchAddressFromLocation(location) { [weak self] address in
                 print(address)
-                self.address = address
+                self?.address = address
             }
         }
-        
-        
     }
     
     func showAddressOnMap(_ addressText: String) {
         geocodeService.fetchLocationFromAddress(addressText) { [weak self] location in
-            guard let self else {return}
+            guard let self else { return }
             self.showLocationOnMap(location)
         }
     }
     
     func showCurrentLocationOnMap() {
         locationService.fetchCurrentLocation { [weak self] location in
-            guard let self else {return}
-            
+            guard let self else { return }
+
             showLocationOnMap(location)
             
             fetchAddressFromLocation(location) { [weak self] addressText in
                 self?.addressPanelView.update(addressText: addressText)
             }
-            
-        
         }
     }
-    
-    func showLocationOnMap(_ location: CLLocation) {
-        let regionRadius: CLLocationDistance = 500.0
-        let region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
-        mapView.setRegion(region, animated: true)
-    }
-    func transitToAddAddress() {
-        self.addressPanelView.onAddressButtonTapped = {
-            self.navigateToAddAddress()
-        }
-    }
-    
-    func navigateToAddAddress() {
-        let addController = AddressAddViewController()
-        present(addController, animated: true)
-    }
-
 }
 
+//MARK: Map Delegate
 extension MapViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         let center = mapView.centerCoordinate
-        print("did change ->", center)
-        
         let location = CLLocation(latitude: center.latitude, longitude: center.longitude)
         
-        fetchAddressFromLocation(location) { addressText in
-            self.addressPanelView.update(addressText: addressText)
+        fetchAddressFromLocation(location) { [weak self] addressText in
+            self?.addressPanelView.update(addressText: addressText)
         }
     }
     
-    func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
-        let center = mapView.centerCoordinate
-        print("will change ->", center)
-    }
+//    func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
+//        let center = mapView.centerCoordinate
+//    }
 }
 
-
-
-//MARK: LAYOUT
+//MARK: Layout
 extension MapViewController {
-    func setupViews() {
+    private func setupViews() {
         view.backgroundColor = .systemBackground
         view.addSubview(mapView)
         view.addSubview(pinImageView)
         view.addSubview(addressPanelView)
         view.addSubview(closeButton)
-
     }
     
-    func setupConstraints() {
+    private func setupConstraints() {
         addressPanelView.snp.makeConstraints { make in
             make.left.right.equalTo(view)
             make.bottom.equalTo(view.safeAreaLayoutGuide)
@@ -213,6 +209,5 @@ extension MapViewController {
         closeButton.snp.makeConstraints { make in
             make.left.top.equalTo(view.safeAreaLayoutGuide).offset(5)
         }
-      
     }
 }

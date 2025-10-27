@@ -13,11 +13,11 @@ protocol ICartViewController {
     var additions: [Product] { get set }
 }
 
-class CartViewController: UIViewController {
+final class CartViewController: UIViewController {
 
-    let cartStorage: ICartStorage
-    let productService: IProductService
-    
+    private let cartStorage: ICartStorage
+    private let productService: IProductService
+
     init(cartStorage: ICartStorage, productService: IProductService) {
         self.cartStorage = cartStorage
         self.productService = productService
@@ -29,28 +29,28 @@ class CartViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    var additions: [Product] = []{
+    private var additions: [Product] = []{
         didSet{
             tableView.reloadData()
         }
     }
-    var products: [Product] = []{
+    private var products: [Product] = []{
         didSet{
             tableView.reloadData()
         }
     }
     
-    var lastContentOffset: CGFloat = 0
-    let cartLabelCell = CartPriceView()
-    
-    let priceButton: UIButton = {
+    private var lastContentOffset: CGFloat = 0
+    private let cartLabelCell = CartPriceView()
+
+    private let priceButton: UIButton = {
        let button = UIButton()
         button.backgroundColor = .orange
         button.layer.cornerRadius = 25
         return button
     }()
 
-    lazy var tableView: UITableView = {
+    private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.delegate = self
@@ -91,17 +91,17 @@ extension CartViewController {
         self.products = cartStorage.fetch()
     }
     
-    func removeInStorage(_ product: Product) {
+    private func removeInStorage(_ product: Product) {
         self.cartStorage.remove(product)
         self.fetchProductsFromStorage()
     }
     
-    func appendInStorage(_ product: Product) {
+    private func appendInStorage(_ product: Product) {
         self.cartStorage.append(product)
         self.fetchProductsFromStorage()
     }
     
-    func calculateCartPrice() -> String {
+    private func calculateCartPrice() -> String {
         var count = 0
         var totalPrice = 0
         for item in products {
@@ -214,7 +214,7 @@ extension CartViewController: UIScrollViewDelegate {
 
 //MARK: Business Logic
 extension CartViewController {
-    func fetchAdditionsFromApi() {
+    private func fetchAdditionsFromApi() {
         productService.fetchProducts { result in
             switch result {
             case .success(let products):
@@ -228,8 +228,8 @@ extension CartViewController {
 
 //MARK: Navigation
 extension CartViewController {
-    func navigateToDetailProduct(_ product: Product) {
-        
+    private func navigateToDetailProduct(_ product: Product) {
+
         let detailVC = di.screenFactory.makeDetailProductScreen(product)
         detailVC.addProductButtonTapped = {
             self.viewWillAppear(true)
@@ -240,14 +240,14 @@ extension CartViewController {
 
 //MARK: Layout
 extension CartViewController {
-    func setupViews() {
+    private func setupViews() {
         view.backgroundColor = .systemBackground
         view.addSubview(tableView)
         view.addSubview(cartLabelCell)
         view.addSubview(priceButton)
     }
     
-    func setupConstraints() {
+    private func setupConstraints() {
         cartLabelCell.snp.makeConstraints { make in
             make.left.right.top.equalTo(view)
             make.height.equalTo(100)

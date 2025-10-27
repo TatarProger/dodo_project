@@ -7,18 +7,18 @@
 
 import UIKit
 
-class DetailProductController: UIViewController {
-    
+final class DetailProductController: UIViewController {
+
     var addProductButtonTapped: (()->())?
     var sizeDoughOn: (()->(String, String))?
     
-    let cartStorage: CartStorage
-    let ingredientService: IngredientService
-    var pizzaSize: String?
-    
+    private let cartStorage: ICartStorage
+    private let ingredientService: IIngredientService
+    private var pizzaSize: String?
+
     let productTitleView = ProductTitleView()
 
-    init(cartStorage: CartStorage, ingredientService: IngredientService) {
+    init(cartStorage: ICartStorage, ingredientService: IIngredientService) {
         self.cartStorage = cartStorage
         self.ingredientService = ingredientService
         
@@ -29,21 +29,21 @@ class DetailProductController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    var ingredients: [Ingredient] = [] {
+    private var ingredients: [Ingredient] = [] {
         didSet {
             someTableView.reloadData()
         }
     }
     
-    var product: Product? {
+    private var product: Product? {
         didSet {
             someTableView.reloadData()
         }
     }
     
-    var lastContentOffset: CGFloat = 0
-    
-    let containerView: UIView = {
+    private var lastContentOffset: CGFloat = 0
+
+    private let containerView: UIView = {
         let view = UIView()
         view.backgroundColor = .systemBackground
         view.heightAnchor.constraint(equalToConstant: 70).isActive = true
@@ -52,7 +52,7 @@ class DetailProductController: UIViewController {
         return view
     }()
     
-    lazy var someTableView: UITableView = {
+    private lazy var someTableView: UITableView = {
         let table = UITableView()
         table.heightAnchor.constraint(equalToConstant: 150).isActive = true
         table.dataSource = self
@@ -67,7 +67,7 @@ class DetailProductController: UIViewController {
         return table
     }()
     
-    let priceButton: UIButton = {
+    private let priceButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("В корзину за 500 р.", for: .normal)
         button.setTitleColor(.white, for: .normal)
@@ -88,7 +88,7 @@ class DetailProductController: UIViewController {
 
 //MARK: - Observers
 extension DetailProductController {
-    func observe() {
+    private func observe() {
         productTitleView.onCloseButtonTapped = { [weak self] in
             self?.closeButtonTapped()
         }
@@ -98,23 +98,24 @@ extension DetailProductController {
 //MARK: - Event Handler
 extension DetailProductController {
     
-    func closeButtonTapped() {
+    private func closeButtonTapped() {
         dismiss(animated: true)
     }
-    
-    @objc func priceButtonTapped() {
+
+    @objc
+    private func priceButtonTapped() {
         addProductButtonTapped?()
-        guard var product else { return }
+        guard let product else { return }
         cartStorage.append(product)
     }
     
-    func ingredientCellSelected(_ ingredient: Ingredient) {
-        
+    private func ingredientCellSelected(_ ingredient: Ingredient) {
+
         if let index = self.ingredients.firstIndex(where: { $0 == ingredient }) {
             
             var ingredient = self.ingredients[index]
-            ingredient.selected
-            
+            ingredient = ingredient.selected
+
             self.product?.ingredients = []
 
             if ingredient.isSelected == true {
@@ -133,7 +134,8 @@ extension DetailProductController {
 extension DetailProductController {
     
     private func fetchIngredients(){
-        ingredientService.fetchIngredients { result in
+        ingredientService.fetchIngredients { [weak self] result in
+            guard let self else { return }
             switch result {
             case .success(let ingredient):
                 self.ingredients = ingredient
@@ -192,11 +194,13 @@ extension DetailProductController: UITableViewDelegate, UITableViewDataSource {
             case .sizeDough:
                 let cell = tableView.dequeuCell(indexPath) as PizzaSizeDoughCell
                 
-                cell.onSizeChanged = { size in
+                cell.onSizeChanged = { [weak self] size in
+                    guard let self else { return }
                     self.product = self.product?.changeSize(size)
                 }
                     
-                cell.onDoughChanged = { dough in
+                cell.onDoughChanged = { [weak self] dough in
+                    guard let self else { return }
                     self.product = self.product?.changeDough(dough)
                 }
                 
@@ -214,7 +218,8 @@ extension DetailProductController: UITableViewDelegate, UITableViewDataSource {
             case .ingredients:
                 let cell = tableView.dequeuCell(indexPath) as PizzaIngredientsCell
                 
-                cell.onIngredientSelected = { ingredient in
+                cell.onIngredientSelected = { [weak self] ingredient in
+                    guard let self else { return }
                     self.ingredientCellSelected(ingredient)
                 }
                 
@@ -251,14 +256,14 @@ extension DetailProductController: UIScrollViewDelegate {
 
 //MARK: - Layout
 extension DetailProductController {
-    func setupViews() {
+    private func setupViews() {
         view.backgroundColor = .systemBackground
         view.addSubview(someTableView)
         view.addSubview(containerView)
         containerView.addSubview(priceButton)
         view.addSubview(productTitleView)
     }
-    func setupConstraints() {
+    private func setupConstraints() {
         productTitleView.snp.makeConstraints { make in
             make.left.right.top.equalTo(view)
             make.height.equalTo(100)

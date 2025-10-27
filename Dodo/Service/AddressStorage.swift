@@ -85,9 +85,6 @@ extension AddressStorage {
             return
         }
         
-        //$0 - short hand param
-        //condition?true:false - ternary operator
-        
         guard !addresses.contains(address) else { 
             
             addresses.removeAll {$0 == address}
@@ -96,7 +93,7 @@ extension AddressStorage {
             save(addresses)
             
             return
-        }  //early exit operator
+        }
         
         addresses = addresses.map { return $0.isSelected ? $0.toggleSelected : $0 }
         

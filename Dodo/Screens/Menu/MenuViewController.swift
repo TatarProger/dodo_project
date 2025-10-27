@@ -259,7 +259,7 @@ extension MenuViewController {
     }
     
     func navigateToMapScreen() {
-        let mapController = ScreenFactory().makeMapScreen()
+        let mapController = di.screenFactory.makeMapScreen()
         present(mapController, animated: true)
     }
     

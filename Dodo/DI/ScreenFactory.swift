@@ -20,7 +20,7 @@ class ScreenFactory: IScreenFactory {
 
     func makeMenuScreen() -> MenuViewController {
         let menuVC = MenuViewController()
-        let presenter = MenuPresenter.init(productService: di.productService, categoryService: di.categoryService, addressStorage: di.addressStorage, featureToggleStorage: di.featureToggleStorage)
+        let presenter = MenuPresenter(productService: di.productService, categoryService: di.categoryService, addressStorage: di.addressStorage, featureToggleStorage: di.featureToggleStorage)
         
         menuVC.presenter = presenter
         presenter.view = menuVC
@@ -40,7 +40,7 @@ class ScreenFactory: IScreenFactory {
     }
     
     func makeMapScreen() -> MapViewController {
-        let mapVC = MapViewController()
+        let mapVC = MapViewController(locationService: di.locationService, geocodeService: di.geocodeService, addressStorage: di.addressStorage)
         return mapVC
     }
 }
