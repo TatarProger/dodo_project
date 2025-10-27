@@ -6,7 +6,7 @@
 //
 
 import UIKit
-class ProfileViewController: UIViewController {
+final class ProfileViewController: UIViewController {
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
@@ -22,8 +22,7 @@ class ProfileViewController: UIViewController {
         setupConstraints()
     }
     
-    
-    lazy var tableView: UITableView = {
+    private lazy var tableView: UITableView = {
         let table = UITableView()
         table.delegate = self
         table.dataSource = self
@@ -33,7 +32,7 @@ class ProfileViewController: UIViewController {
         return table
     }()
     
-    let closeButton: UIButton = {
+    private let closeButton: UIButton = {
         let button = UIButton(type: .system)
         let configuration = UIImage.SymbolConfiguration(pointSize: 20)
         button.setImage(UIImage(systemName: "xmark", withConfiguration: configuration), for: .normal)
@@ -47,47 +46,27 @@ class ProfileViewController: UIViewController {
         button.addTarget(nil, action: #selector(closeButtonTapped), for: .touchUpInside)
         return button
     }()
-    
-    @objc func closeButtonTapped() {
+}
+
+//MARK: Event Handler
+extension ProfileViewController {
+    @objc
+    private func closeButtonTapped() {
         self.dismiss(animated: true)
     }
 }
 
-
-//MARK: Layout
-extension ProfileViewController {
-    func setupViews() {
-        view.backgroundColor = .white
-        view.addSubview(closeButton)
-        view.addSubview(tableView)
-    }
-    
-    func setupConstraints() {
-        closeButton.snp.makeConstraints { make in
-            make.top.equalTo(view).inset(5)
-            make.left.equalTo(view).inset(5)
-        }
-        
-        tableView.snp.makeConstraints { make in
-            make.top.equalTo(closeButton.snp.bottom).offset(10)
-            make.left.right.bottom.equalTo(view)
-        }
-
-    }
-}
-
-
-extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
+extension ProfileViewController: UITableViewDataSource {
     enum ProfileSections: Int, CaseIterable {
         case personalData
         case personalOffers
         case missions
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return ProfileSections.allCases.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let sectionType = ProfileSections(rawValue: indexPath.row) {
             switch sectionType {
@@ -104,7 +83,9 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         }
         return UITableViewCell()
     }
-    
+}
+
+extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if let sectionType = ProfileSections(rawValue: indexPath.row) {
             switch sectionType {
@@ -115,10 +96,30 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             case .missions:
                 return 400
             }
-            
+
         }
         return 300
     }
-    
-    
+}
+
+//MARK: Layout
+extension ProfileViewController {
+    private func setupViews() {
+        view.backgroundColor = .white
+        view.addSubview(closeButton)
+        view.addSubview(tableView)
+    }
+
+    private func setupConstraints() {
+        closeButton.snp.makeConstraints { make in
+            make.top.equalTo(view).inset(5)
+            make.left.equalTo(view).inset(5)
+        }
+
+        tableView.snp.makeConstraints { make in
+            make.top.equalTo(closeButton.snp.bottom).offset(10)
+            make.left.right.bottom.equalTo(view)
+        }
+
+    }
 }

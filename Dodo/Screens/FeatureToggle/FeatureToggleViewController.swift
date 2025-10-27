@@ -6,15 +6,15 @@
 //
 
 import UIKit
-class FeatureToggleViewController: UIViewController {
-    
-    let localFeatureToggles = LocalFeatureToggles()
-    let remoteFeatureToggles = RemoteFeatureToggles()
-    let featureToggleStorage = FeatureToggleStorage()
-    var remoteFeatures:[Feature] = []
-    var localFeatures:[Feature] = []
-    
-    lazy var featuresTableView: UITableView = {
+final class FeatureToggleViewController: UIViewController {
+
+    private let localFeatureToggles = LocalFeatureToggles()
+    private let remoteFeatureToggles = RemoteFeatureToggles()
+    private let featureToggleStorage = FeatureToggleStorage()
+    private var remoteFeatures:[Feature] = []
+    private var localFeatures:[Feature] = []
+
+    private lazy var featuresTableView: UITableView = {
         let table = UITableView()
         
         table.delegate = self
@@ -25,7 +25,7 @@ class FeatureToggleViewController: UIViewController {
         return table
     }()
     
-    lazy var remoteFeaturesTableView: UITableView = {
+    private lazy var remoteFeaturesTableView: UITableView = {
         let table = UITableView()
         table.delegate = self
         table.dataSource = self
@@ -35,7 +35,7 @@ class FeatureToggleViewController: UIViewController {
         return table
     }()
     
-    let startButton: UIButton = {
+    private let startButton: UIButton = {
         let button = UIButton()
         button.setTitle("Start App", for: .normal)
         button.setTitleColor(.black, for: .normal)
@@ -47,15 +47,14 @@ class FeatureToggleViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        //fetchLocalFeauteres()
-        //fetchRemoteFeatures()
+
         setupViews()
         setupConstraints()
         
         handleFeatureToggles()
     }
     
-    func handleFeatureToggles() {
+    private func handleFeatureToggles() {
         let dispatchGroup = DispatchGroup()
         
         dispatchGroup.enter()
@@ -73,35 +72,34 @@ class FeatureToggleViewController: UIViewController {
             self.featuresTableView.reloadData()
             self.remoteFeaturesTableView.reloadData()
         }
-        
-        //featureListView.reloadData()
     }
     
-    func fetchLocalFeauteres(completion: @escaping () -> ()) {
-        
+    private func fetchLocalFeauteres(completion: @escaping () -> ()) {
+
         self.localFeatures = localFeatureToggles.load()
         completion()
         
     }
     
-    func fetchRemoteFeatures(completion: @escaping ()->()) {
+    private func fetchRemoteFeatures(completion: @escaping ()->()) {
         remoteFeatureToggles.fetchJSON { features in
             self.remoteFeatures = features
             completion()
         }
     }
+}
 
-
-    
-    @objc func navigateToTabbar() {
+//MARK: Navigation Logic
+extension FeatureToggleViewController {
+    @objc
+    private func navigateToTabbar() {
         let tabBarController = TabBarController()
         tabBarController.modalPresentationStyle = .fullScreen
         present(tabBarController, animated: true, completion: nil)
     }
-    
 }
 
-extension FeatureToggleViewController: UITableViewDelegate, UITableViewDataSource {
+extension FeatureToggleViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if tableView == self.featuresTableView {
@@ -124,18 +122,12 @@ extension FeatureToggleViewController: UITableViewDelegate, UITableViewDataSourc
                 self.localFeatureToggles.update(feature)
                 self.localFeatures = self.localFeatureToggles.fetch()
                 self.featuresTableView.reloadData()
-                
-                //self.featureToggleStorage.update(indexPath.row)
-                //print(self.featureToggleStorage.fetch())
             }
-            
             return cell
         }
         
         if tableView == self.remoteFeaturesTableView {
             guard let cell = featuresTableView.dequeueReusableCell(withIdentifier: FeatureToggleCell.reuseId, for: indexPath) as? FeatureToggleCell else {return UITableViewCell()}
-            
-            
             let remoteFeature = remoteFeatures[indexPath.row]
             
             cell.update(feature: remoteFeature)
@@ -145,19 +137,22 @@ extension FeatureToggleViewController: UITableViewDelegate, UITableViewDataSourc
         
         return UITableViewCell()
     }
-    
-    
 }
 
+extension FeatureToggleViewController: UITableViewDelegate {
+
+}
+
+//MARK: Layout
 extension FeatureToggleViewController {
-    func setupViews() {
+    private func setupViews() {
         view.backgroundColor = .systemBackground
         view.addSubview(featuresTableView)
         view.addSubview(remoteFeaturesTableView)
         view.addSubview(startButton)
     }
     
-    func setupConstraints() {
+    private func setupConstraints() {
         startButton.snp.makeConstraints { make in
             make.top.equalTo(featuresTableView.snp.bottom)
             make.left.right.equalTo(view.safeAreaLayoutGuide).inset(10)
