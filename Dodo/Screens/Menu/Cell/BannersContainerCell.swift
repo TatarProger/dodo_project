@@ -37,7 +37,8 @@ final class BannersContainerCell: UITableViewCell {
         collection.backgroundColor = .systemBackground
         collection.dataSource = self
         collection.delegate = self
-        
+        collection.contentInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
+
         collection.register(BannerCollectionCell.self, forCellWithReuseIdentifier: BannerCollectionCell.reusedId)
         
         return collection

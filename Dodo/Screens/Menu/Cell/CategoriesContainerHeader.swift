@@ -28,6 +28,7 @@ final class CategoriesContainerHeader: UITableViewHeaderFooterView {
         collection.delegate = self
         collection.register(CategoryCell.self, forCellWithReuseIdentifier: CategoryCell.reuseId)
         collection.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        collection.contentInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
         return collection
     }()
     
