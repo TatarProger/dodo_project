@@ -22,6 +22,9 @@
 		A20711902C5A861A00431327 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = A207118F2C5A861A00431327 /* Product.swift */; };
 		A22274832C7CB6B8009BEE7B /* BannersContainerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22274822C7CB6B8009BEE7B /* BannersContainerCell.swift */; };
 		A22274852C7CBC1E009BEE7B /* BannerCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22274842C7CBC1E009BEE7B /* BannerCollectionCell.swift */; };
+		A22D09832EBE36E100AC4EEF /* categories.json in Resources */ = {isa = PBXBuildFile; fileRef = A22D09822EBE36D400AC4EEF /* categories.json */; };
+		A22D09852EBE36FE00AC4EEF /* ingridients.json in Resources */ = {isa = PBXBuildFile; fileRef = A22D09842EBE36F400AC4EEF /* ingridients.json */; };
+		A22D09872EBE372E00AC4EEF /* products.json in Resources */ = {isa = PBXBuildFile; fileRef = A22D09862EBE372700AC4EEF /* products.json */; };
 		A233A4112CD7FB4D00D13520 /* AddressStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A233A4102CD7FB4D00D13520 /* AddressStorage.swift */; };
 		A233A4132CD801A100D13520 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = A233A4122CD801A100D13520 /* Address.swift */; };
 		A233A4162CD81A9C00D13520 /* AddressListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A233A4152CD81A9C00D13520 /* AddressListViewController.swift */; };
@@ -116,6 +119,9 @@
 		A207118F2C5A861A00431327 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		A22274822C7CB6B8009BEE7B /* BannersContainerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannersContainerCell.swift; sourceTree = "<group>"; };
 		A22274842C7CBC1E009BEE7B /* BannerCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerCollectionCell.swift; sourceTree = "<group>"; };
+		A22D09822EBE36D400AC4EEF /* categories.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = categories.json; sourceTree = "<group>"; };
+		A22D09842EBE36F400AC4EEF /* ingridients.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ingridients.json; sourceTree = "<group>"; };
+		A22D09862EBE372700AC4EEF /* products.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = products.json; sourceTree = "<group>"; };
 		A233A4102CD7FB4D00D13520 /* AddressStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressStorage.swift; sourceTree = "<group>"; };
 		A233A4122CD801A100D13520 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		A233A4152CD81A9C00D13520 /* AddressListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressListViewController.swift; sourceTree = "<group>"; };
@@ -413,6 +419,9 @@
 		A273D6272C63A1D60082B45F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A22D09862EBE372700AC4EEF /* products.json */,
+				A22D09842EBE36F400AC4EEF /* ingridients.json */,
+				A22D09822EBE36D400AC4EEF /* categories.json */,
 				A2A452BA2D302EF10097FF29 /* FeatureToggles.json */,
 				A207117D2C5A712600431327 /* Main.storyboard */,
 				A2E03FDD2C94645F0006D43C /* Assets.xcassets */,
@@ -586,11 +595,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				A2A48BE62C963C8B001A99FB /* MultiroundPro.otf in Resources */,
+				A22D09832EBE36E100AC4EEF /* categories.json in Resources */,
 				A20711842C5A712700431327 /* Base in Resources */,
 				A2E03FDE2C94645F0006D43C /* Assets.xcassets in Resources */,
 				A2A48BEE2C970DA9001A99FB /* OpenSans-VariableFont_wdth,wght.ttf in Resources */,
 				A2A452BB2D302EF20097FF29 /* FeatureToggles.json in Resources */,
+				A22D09852EBE36FE00AC4EEF /* ingridients.json in Resources */,
 				A207117F2C5A712600431327 /* Base in Resources */,
+				A22D09872EBE372E00AC4EEF /* products.json in Resources */,
 				A2A48BEC2C970C05001A99FB /* microsoftsansserif.ttf in Resources */,
 				A2A48BEA2C96DF5B001A99FB /* dodo-rounded.ttf in Resources */,
 			);

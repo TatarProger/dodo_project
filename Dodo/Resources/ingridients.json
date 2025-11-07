@@ -1,0 +1,39 @@
+[{
+  "imageName" : "Mozzarella",
+  "nameOfIngredient" : "Сливочная моцарелла",
+  "price" : "69 р.",
+  "isSelected" : true,
+  "size": "25 см"
+},
+{
+  "imageName" : "Champignons",
+  "nameOfIngredient" : "Шампиньоны",
+  "price" : "49 р.",
+  "isSelected" : false,
+  "size": "25 см"
+},
+{
+  "imageName" : "Chicken",
+  "nameOfIngredient" : "Нежный цыпленок",
+  "price" : "69 р.",
+  "isSelected" : false
+},
+{
+  "imageName" : "Sausage",
+  "nameOfIngredient" : "Пикантная пепперони",
+  "price" : "69 р.",
+  "isSelected" : false
+},
+{
+  "imageName" : "Pickles",
+  "nameOfIngredient" : "Маринованные огурчики",
+  "price" : "49 р.",
+  "isSelected" : false
+},
+{
+  "imageName" : "Tomatoes",
+  "nameOfIngredient" : "Помидоры",
+  "price" : "49 р.",
+  "isSelected" : false
+}]
+
