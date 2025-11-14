@@ -34,10 +34,12 @@ final class AddressListViewController: UIViewController {
     
     private func fetchAdresses() {
         addresses = addressStorage.fetch()
+
+        print(addresses)
     }
 }
 
-extension AddressListViewController: UITableViewDelegate, UITableViewDataSource {
+extension AddressListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return addresses.count
     }
@@ -46,6 +48,15 @@ extension AddressListViewController: UITableViewDelegate, UITableViewDataSource 
         let cell = addressTableView.dequeuCell(indexPath) as AddressesCell
         cell.update(address: addresses[indexPath.row])
         return cell
+    }
+}
+
+extension AddressListViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        addressStorage.select(index: indexPath.row)
+
+        addresses = addressStorage.fetch()
+        tableView.reloadData()
     }
 }
 

@@ -8,11 +8,13 @@
 import Foundation
 
 protocol IAdressStorage {
-    func fetchDefaultAddress() -> String
+    func fetchSelectedAddress() -> String
     func fetch() -> [Address]
     func remove(_ address: Address)
     func append(_ address: Address)
-    
+    func deselect() -> [Address]
+    func select(index: Int) -> [Address]
+
 }
 
 final class AddressStorage: IAdressStorage {
@@ -34,7 +36,7 @@ final class AddressStorage: IAdressStorage {
 //MARK: Private
 extension AddressStorage {
     private func save(_ Addresses: [Address]) {
-        do{
+        do {
             let data = try encode.encode(Addresses)
             userDefaults.set(data, forKey: key)
         } catch {
@@ -45,12 +47,15 @@ extension AddressStorage {
 
 //MARK: Public
 extension AddressStorage {
-    func fetchDefaultAddress() -> String {
+    func fetchSelectedAddress() -> String {
         let array = fetch()
-        if !array.isEmpty {
-            return array[0].fullAddress
+
+        for address in array {
+            if address.isSelected {
+                return address.fullAddress
+            }
         }
-        
+
         return "Адрес не установлен"
     }
     
@@ -100,5 +105,36 @@ extension AddressStorage {
         addresses.insert(address, at: 0)
         
         save(addresses)
+    }
+
+    func deselect() -> [Address] {
+        var addresses = fetch()
+
+        for index in 0..<addresses.count {
+            if addresses[index].isSelected {
+                addresses[index] = addresses[index].toggleSelected
+            }
+        }
+        print(addresses.map{$0.isSelected})
+
+        save(addresses)
+        return addresses
+    }
+
+    func select(index: Int) -> [Address] {
+        var addresses = deselect()
+
+        addresses[index] = addresses[index].toggleSelected
+
+        save(addresses)
+        print(addresses.map{$0.isSelected})
+
+        NotificationCenter.default.post(
+            name: .addressChanged,
+            object: nil,
+            userInfo: ["address": addresses[index].fullAddress] 
+        )
+
+        return addresses
     }
 }

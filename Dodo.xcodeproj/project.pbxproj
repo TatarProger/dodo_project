@@ -26,6 +26,7 @@
 		A22D09852EBE36FE00AC4EEF /* ingridients.json in Resources */ = {isa = PBXBuildFile; fileRef = A22D09842EBE36F400AC4EEF /* ingridients.json */; };
 		A22D09872EBE372E00AC4EEF /* products.json in Resources */ = {isa = PBXBuildFile; fileRef = A22D09862EBE372700AC4EEF /* products.json */; };
 		A22D098D2EBE489600AC4EEF /* EmptyCartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22D098C2EBE489100AC4EEF /* EmptyCartView.swift */; };
+		A22D0AC02EC7971700AC4EEF /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22D0ABF2EC7971300AC4EEF /* Notifications.swift */; };
 		A233A4112CD7FB4D00D13520 /* AddressStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A233A4102CD7FB4D00D13520 /* AddressStorage.swift */; };
 		A233A4132CD801A100D13520 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = A233A4122CD801A100D13520 /* Address.swift */; };
 		A233A4162CD81A9C00D13520 /* AddressListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A233A4152CD81A9C00D13520 /* AddressListViewController.swift */; };
@@ -124,6 +125,7 @@
 		A22D09842EBE36F400AC4EEF /* ingridients.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ingridients.json; sourceTree = "<group>"; };
 		A22D09862EBE372700AC4EEF /* products.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = products.json; sourceTree = "<group>"; };
 		A22D098C2EBE489100AC4EEF /* EmptyCartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyCartView.swift; sourceTree = "<group>"; };
+		A22D0ABF2EC7971300AC4EEF /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		A233A4102CD7FB4D00D13520 /* AddressStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressStorage.swift; sourceTree = "<group>"; };
 		A233A4122CD801A100D13520 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		A233A4152CD81A9C00D13520 /* AddressListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressListViewController.swift; sourceTree = "<group>"; };
@@ -422,6 +424,7 @@
 		A273D6272C63A1D60082B45F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A22D0ABF2EC7971300AC4EEF /* Notifications.swift */,
 				A22D09862EBE372700AC4EEF /* products.json */,
 				A22D09842EBE36F400AC4EEF /* ingridients.json */,
 				A22D09822EBE36D400AC4EEF /* categories.json */,
@@ -675,6 +678,7 @@
 				A2A452B42D3026B10097FF29 /* FeatureToggleViewController.swift in Sources */,
 				A273D5F82C5FB0DD0082B45F /* Button.swift in Sources */,
 				A299DDEB2CD0429D003C8102 /* MapViewController.swift in Sources */,
+				A22D0AC02EC7971700AC4EEF /* Notifications.swift in Sources */,
 				A2C50ECB2C885E4300804AF5 /* DetailProductController.swift in Sources */,
 				A2AD42B82CA43B9D003E69AF /* TotalPriceCell.swift in Sources */,
 				A2F623E12CF75B030077C84F /* ScreenFactory.swift in Sources */,
