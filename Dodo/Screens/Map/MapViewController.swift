@@ -11,12 +11,14 @@ import CoreLocation
 import SnapKit
 
 final class MapViewController: UIViewController {
+
     private var bottomConstraint: NSLayoutConstraint?
     private var originalConstant: CGFloat = 0
 
     private let locationService: ILocationService
     private let geocodeService: IGeocodeService
     private let addressStorage: IAdressStorage
+
     private let addressPanelView = AddressPanelView()
 
     private var address: Address?
@@ -133,6 +135,7 @@ extension MapViewController {
 
 //MARK: Business Logic
 extension MapViewController {
+
     func fetchAddressFromLocation(_ location: CLLocation, completion: @escaping (String) -> (Void)) {
         self.geocodeService.fetchAddressFromLocation(location) { [weak self] addressText in
             guard let self else { return }
@@ -149,6 +152,8 @@ extension MapViewController {
         geocodeService.fetchLocationFromAddress(addressText) { [weak self] location in
             guard let self else { return }
             self.showLocationOnMap(location)
+            //self.addressPanelView.update(addressText: addressText)
+
         }
     }
     

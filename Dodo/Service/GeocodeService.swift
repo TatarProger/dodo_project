@@ -44,7 +44,10 @@ class GeocodeService: IGeocodeService {
         geoCoder.reverseGeocodeLocation(location, preferredLocale: Locale(identifier: "ru_RU")) { placemarks, error in
             
             if let place = placemarks?.first {
-                let address = Address(city: "\(place.administrativeArea ?? "") \(place.locality ?? "")", street: place.thoroughfare ?? " ", numberOfBuilding: Int(place.subThoroughfare ?? "") ?? 0, numberOfFlat: 0, floor: 0, enter: 0, code: " ", commentary: " ", isSelected: true)
+
+
+
+                let address = Address(city: "\(place.locality ?? "")", street: place.thoroughfare ?? " ", numberOfBuilding: place.subThoroughfare ?? "", numberOfFlat: 0, floor: 0, enter: 0, code: " ", commentary: " ", isSelected: true)
                 
                 completion(address)
             }

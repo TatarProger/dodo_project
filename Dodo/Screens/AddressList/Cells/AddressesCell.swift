@@ -39,6 +39,8 @@ class AddressesCell: UITableViewCell {
         
         if address.isSelected {
             selectImageView.image = UIImage(systemName: "circle.circle.fill")
+        } else {
+            selectImageView.image = UIImage(systemName: "circle")
         }
     }
 }
