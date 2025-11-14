@@ -31,7 +31,7 @@ final class BannersContainerCell: UITableViewCell {
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collection.showsHorizontalScrollIndicator = false
         layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: 175, height: 100)
+        layout.itemSize = CGSize(width: 200, height: 100)
         
         collection.heightAnchor.constraint(equalToConstant: 150).isActive = true
         collection.backgroundColor = .systemBackground

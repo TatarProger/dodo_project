@@ -22,6 +22,7 @@ final class BannerCollectionCell: UICollectionViewCell {
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.text = "Пеперони"
+        label.numberOfLines = 0
         label.font = UIFont(name: "Dodo Rounded", size: 15)
         return label
     }()
@@ -40,12 +41,7 @@ final class BannerCollectionCell: UICollectionViewCell {
     func update(_ product: Product) {
         nameLabel.text = product.name
         priceButton.setTitle("\(product.price) р", for: .normal)
-        guard let url = URL(string: "https://i.postimg.cc/26GJBJNk/temp-Imagef7-TRHK.avif") else {return}
-        
-        Task {
-            let imageTask = ImagePipeline.shared.imageTask(with: url)
-            photoImageView.image = try await imageTask.image
-        }
+        photoImageView.image = UIImage(named: product.image)
     }
     
 
