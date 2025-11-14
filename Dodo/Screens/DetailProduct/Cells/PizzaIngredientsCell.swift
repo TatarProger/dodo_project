@@ -7,18 +7,15 @@
 
 import UIKit
 class PizzaIngredientsCell: UITableViewCell {
-    
-    //static let reuseId = "PizzaIngredientsCell"
-    
-    //let ingredientService = IngredientService()
+
     var onIngredientSelected: ((Ingredient)->())?
-    var ingredients: [Ingredient] = []{
+    private var ingredients: [Ingredient] = []{
         didSet {
             collectionView.reloadData()
         }
     }
     
-    lazy var collectionView: UICollectionView = {
+    private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = 24
@@ -47,7 +44,6 @@ class PizzaIngredientsCell: UITableViewCell {
     }
 }
 
-
 extension PizzaIngredientsCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return ingredients.count
@@ -67,15 +63,13 @@ extension PizzaIngredientsCell: UICollectionViewDelegate, UICollectionViewDataSo
     }
 }
 
-
-
 extension PizzaIngredientsCell {
-    func setupViews() {
+    private func setupViews() {
         selectionStyle = .none
         contentView.addSubview(collectionView)
     }
     
-    func setupConstraints() {
+    private func setupConstraints() {
         collectionView.snp.makeConstraints { make in
             make.edges.equalTo(contentView).inset(10)
             make.height.equalTo(500)

@@ -8,7 +8,7 @@
 import UIKit
 class MissionsContainerCell: UITableViewCell {
     
-    lazy var collectionView: UICollectionView = {
+    private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 25
@@ -23,7 +23,7 @@ class MissionsContainerCell: UITableViewCell {
         return collection
     }()
     
-    let nameLabel: UILabel = {
+    private let nameLabel: UILabel = {
         let label = UILabel()
         label.text = "Задания"
         label.font = UIFont(name: "Dodo Rounded", size: 25)
@@ -53,17 +53,15 @@ extension MissionsContainerCell: UICollectionViewDelegate, UICollectionViewDataS
         
         return cell
     }
-    
-    
 }
 
 extension MissionsContainerCell {
-    func setupViews() {
+    private func setupViews() {
         contentView.addSubview(nameLabel)
         contentView.addSubview(collectionView)
     }
     
-    func setupConstraints() {
+    private func setupConstraints() {
         nameLabel.snp.makeConstraints { make in
             make.top.equalTo(contentView).inset(5)
             make.left.equalTo(contentView).inset(5)

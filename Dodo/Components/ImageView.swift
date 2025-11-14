@@ -9,6 +9,7 @@ import UIKit
 enum ImageViewType {
     case product
     case promo
+    case cart
 }
 class ImageView: UIImageView {
     init(type: ImageViewType) {
@@ -26,6 +27,8 @@ class ImageView: UIImageView {
             makeProductStyle()
         case .promo:
             makePromoStyle()
+        case .cart:
+            makeCartStyle()
         }
 
     }
@@ -46,6 +49,16 @@ class ImageView: UIImageView {
         let width = UIScreen.main.bounds.width
         heightAnchor.constraint(equalToConstant: 0.8 * width).isActive = true
         widthAnchor.constraint(equalToConstant: 0.8 * width).isActive = true
+        translatesAutoresizingMaskIntoConstraints = false
+        self.layer.masksToBounds = true
+    }
+
+    func makeCartStyle() {
+        image = UIImage(named: "EmptyCart")
+        contentMode = .scaleAspectFill
+        let width = UIScreen.main.bounds.width
+        heightAnchor.constraint(equalToConstant: 0.5 * width).isActive = true
+        widthAnchor.constraint(equalToConstant: 0.5 * width).isActive = true
         translatesAutoresizingMaskIntoConstraints = false
         self.layer.masksToBounds = true
     }

@@ -11,18 +11,15 @@ import SnapKit
 
 class PromoCell: UITableViewCell {
     static let reusedId = "ProductCell"
-    
-    
-    
-    var verticalStackView = StackView(15)
-    
-    var nameLabel = Label(text: "Гавайская")
-    
-    var detailLabelView = LabelForDiscription(text: "Тесто, Цыпленок, Моцарелла, Томатный соус")
-    
-    var priceButtonView = Button(text: "от 469 руб")
-    
-    var productImageView = ImageView(type: .promo)
+    private var verticalStackView = StackView(15)
+
+    private var nameLabel = Label(text: "Гавайская")
+
+    private var detailLabelView = LabelForDiscription(text: "Тесто, Цыпленок, Моцарелла, Томатный соус")
+
+    private var priceButtonView = Button(text: "от 469 руб")
+
+    private var productImageView = ImageView(type: .promo)
     
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -51,7 +48,7 @@ extension PromoCell{
     struct Layout {
         static let offset = 16
     }
-    func setupViews() {
+    private func setupViews() {
         verticalStackView.alignment = .center
         self.selectionStyle = .none
         contentView.addSubview(verticalStackView)
@@ -60,17 +57,8 @@ extension PromoCell{
         }
     }
     
-    func setupConstraints() {
-//        productImageView.snp.makeConstraints { make in
-//            make.centerY.equalTo(contentView)
-//            make.left.equalTo(contentView).offset(20)
-//        }
-        
-        //containerView.snp.makeConstraints { make in
-        //}
-        
+    private func setupConstraints() {
         verticalStackView.snp.makeConstraints { make in
-            //make.left.equalTo(contentView).offset(0)
             make.left.right.equalTo(contentView)
             make.top.bottom.equalTo(contentView).inset(16)
         }

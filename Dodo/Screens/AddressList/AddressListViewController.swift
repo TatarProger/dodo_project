@@ -7,28 +7,24 @@
 
 import UIKit
 
-class AddressListViewController: UIViewController {
-    
-    let addressStorage = AddressStorage()
-    
-    var addresses: [Address] = [] {
+final class AddressListViewController: UIViewController {
+
+    private let addressStorage = AddressStorage()
+
+    private var addresses: [Address] = [] {
         didSet {
             addressTableView.reloadData()
         }
     }
     
-    lazy var addressTableView: UITableView = {
+    private lazy var addressTableView: UITableView = {
         let table = UITableView()
         table.delegate = self
         table.dataSource = self
-//        table.register(AddressesCell.self, forCellReuseIdentifier: AddressesCell.reuseId)
         table.registerCell(AddressesCell.self)
         return table
     }()
-    
-    
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -36,36 +32,41 @@ class AddressListViewController: UIViewController {
         fetchAdresses()
     }
     
-    func fetchAdresses() {
+    private func fetchAdresses() {
         addresses = addressStorage.fetch()
+
+        print(addresses)
     }
 }
 
-
-
-extension AddressListViewController: UITableViewDelegate, UITableViewDataSource {
+extension AddressListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return addresses.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        guard let cell = addressTableView.dequeueReusableCell(withIdentifier: AddressesCell.reuseId, for: indexPath) as? AddressesCell else { return UITableViewCell()}
         let cell = addressTableView.dequeuCell(indexPath) as AddressesCell
         cell.update(address: addresses[indexPath.row])
         return cell
     }
-    
-    
 }
 
+extension AddressListViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        addressStorage.select(index: indexPath.row)
+
+        addresses = addressStorage.fetch()
+        tableView.reloadData()
+    }
+}
 
 extension AddressListViewController {
-    func setupViews() {
+    private func setupViews() {
         view.backgroundColor = .systemBackground
         view.addSubview(addressTableView)
     }
     
-    func setupConstraints() {
+    private func setupConstraints() {
         addressTableView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }

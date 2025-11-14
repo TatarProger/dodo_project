@@ -6,6 +6,7 @@
 
 
 import Foundation
+
 protocol ICartStorage {
     func fetch() -> [Product]
     func append(_ product: Product)
@@ -13,7 +14,7 @@ protocol ICartStorage {
 }
 
 final class CartStorage {
-    
+
     private let key = "CartStorage"
     
     private var userDefaults: UserDefaults
@@ -29,17 +30,6 @@ final class CartStorage {
     }
 }
 
-//MARK: - Private
-extension CartStorage {
-    private func save(_ products: [Product]) {
-        do {
-            let data = try encoder.encode(products)
-            userDefaults.set(data, forKey: key)
-        } catch {
-            print(error)
-        }
-    }
-}
 
 //MARK: - Public
 extension CartStorage: ICartStorage {
@@ -76,10 +66,6 @@ extension CartStorage: ICartStorage {
         
         
     }
-    
-    //
-    
-    
     //CREATE/INCREASE
     func append(_ product: Product) {
         var products = fetch()
@@ -102,20 +88,14 @@ extension CartStorage: ICartStorage {
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//MARK: - Private
+extension CartStorage {
+    private func save(_ products: [Product]) {
+        do {
+            let data = try encoder.encode(products)
+            userDefaults.set(data, forKey: key)
+        } catch {
+            print(error)
+        }
+    }
+}

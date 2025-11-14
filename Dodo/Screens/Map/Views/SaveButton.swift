@@ -8,7 +8,15 @@
 import UIKit
 
 class SaveButton: UIButton {
-    
+
+    override var isHighlighted: Bool {
+        didSet {
+            UIView.animate(withDuration: 0.15) {
+                self.alpha = self.isHighlighted ? 0.6 : 1.0
+            }
+        }
+    }
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupCommonInit()

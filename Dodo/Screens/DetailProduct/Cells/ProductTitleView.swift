@@ -20,15 +20,15 @@ class ProductTitleView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    let containerView: UIView = {
+
+    private let containerView: UIView = {
         let view = UIView()
         view.addBlur(style: .light)
         return view
     }()
     
-    let closeButton: UIButton = {
+    private let closeButton: UIButton = {
         let button = UIButton(type: .system)
-        //button.setTitle("X", for: .normal)
         let configuration = UIImage.SymbolConfiguration(pointSize: 20)
         button.setImage(UIImage(systemName: "xmark", withConfiguration: configuration), for: .normal)
         button.tintColor = .black
@@ -42,13 +42,13 @@ class ProductTitleView: UIView {
         return button
     }()
     
-    @objc func closeButtonTapped() {
+    @objc
+    private func closeButtonTapped() {
         onCloseButtonTapped?()
     }
     
-    let titleLabel: UILabel = {
+    private let titleLabel: UILabel = {
        let label = UILabel()
-        //label.font = UIFont(name: "Dodo Rounded", size: 20)
         label.text = "Маргарита"
         label.font = UIFont.boldSystemFont(ofSize: 18)
         return label
@@ -74,16 +74,14 @@ class ProductTitleView: UIView {
 }
 
 extension ProductTitleView {
-    func setupViews() {
-        //containerView.backgroundColor = .orange
+    private func setupViews() {
         addSubview(containerView)
         self.addSubview(closeButton)
         self.addSubview(titleLabel)
     }
     
-    func setupConstraints() {
+    private func setupConstraints() {
         containerView.snp.makeConstraints { make in
-            //make.height.equalTo(100)
             make.edges.equalTo(self)
         }
         closeButton.snp.makeConstraints { make in

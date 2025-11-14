@@ -10,7 +10,7 @@ class TotalPriceCell: UITableViewCell {
     
     static let reuseId = "TotalPriceCell"
     
-    let descriptLabel: UILabel = {
+    private let descriptLabel: UILabel = {
        let label = UILabel()
         label.text = "1 товар на 589 р."
         label.font = UIFont.boldSystemFont(ofSize: 25)
@@ -35,13 +35,12 @@ extension TotalPriceCell {
     }
 }
 
-
 extension TotalPriceCell {
-    func setupViews() {
+    private func setupViews() {
         contentView.addSubview(descriptLabel)
     }
     
-    func setupConstraints() {
+    private func setupConstraints() {
         descriptLabel.snp.makeConstraints { make in
             make.top.bottom.right.equalTo(contentView)
             make.left.equalTo(contentView).offset(10)

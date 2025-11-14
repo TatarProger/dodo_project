@@ -41,14 +41,14 @@ class PizzaSizeDoughCell: UITableViewCell {
     var onSizeChanged: ((String)->())?
     var onDoughChanged: ((String)->())?
 
-    var sizeSegmentedControl: UISegmentedControl = {
+    private var sizeSegmentedControl: UISegmentedControl = {
         let control = UISegmentedControl(items: SizeType.allSizes) //["25 см", "30 см", "35 см"]
         control.selectedSegmentIndex = 0
         control.addTarget(nil, action: #selector(sizeSegmentChanged(_:)), for: .valueChanged)
         return control
     }()
     
-    var doughSegmentedControl: UISegmentedControl = {
+    private var doughSegmentedControl: UISegmentedControl = {
         let control = UISegmentedControl(items: DoughType.allDoughs) //["Традиционное","Тонкое"]
         control.selectedSegmentIndex = 0
         control.addTarget(nil, action: #selector(doughSegmentChanged(_:)), for: .valueChanged)
@@ -76,14 +76,12 @@ class PizzaSizeDoughCell: UITableViewCell {
             sizeSegmentedControl.isHidden = true
             doughSegmentedControl.isHidden = true
         }
-        
-        //String -> SizeType -> Size Index
+
         if let sizeType = SizeType(rawValue: product.size) {
             let index = SizeType.indexBySize(sizeType)
             sizeSegmentedControl.selectedSegmentIndex = index
         }
       
-        //String -> DoughType -> Dough Index
         if let doughType = DoughType(rawValue: product.dough) {
             let index = DoughType.indexByDough(doughType)
             doughSegmentedControl.selectedSegmentIndex = index
@@ -95,12 +93,14 @@ class PizzaSizeDoughCell: UITableViewCell {
 
 //MARK: - Event Handler
 extension PizzaSizeDoughCell {
-    @objc func sizeSegmentChanged(_ sender: UISegmentedControl) {
+    @objc
+    private func sizeSegmentChanged(_ sender: UISegmentedControl) {
         let size = SizeType.allSizes[sender.selectedSegmentIndex]
         onSizeChanged?(size)
     }
     
-    @objc func doughSegmentChanged(_ sender: UISegmentedControl) {
+    @objc
+    private func doughSegmentChanged(_ sender: UISegmentedControl) {
         let dough = DoughType.allDoughs[sender.selectedSegmentIndex]
         onDoughChanged?(dough)
     }
@@ -108,13 +108,13 @@ extension PizzaSizeDoughCell {
 
 
 extension PizzaSizeDoughCell {
-    func setupViews() {
+    private func setupViews() {
         selectionStyle = .none
         contentView.addSubview(sizeSegmentedControl)
         contentView.addSubview(doughSegmentedControl)
     }
     
-    func setupConstraints() {
+    private func setupConstraints() {
         sizeSegmentedControl.snp.makeConstraints { make in
             make.left.top.equalTo(contentView).offset(10)
             make.right.equalTo(contentView).inset(10)

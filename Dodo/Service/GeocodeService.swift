@@ -8,10 +8,16 @@
 import Foundation
 import CoreLocation
 
-class GeocodeService {
+protocol IGeocodeService {
+    func fetchLocationFromAddress(_ addressText: String, completion: @escaping (CLLocation) -> Void)
+    func fetchAddressFromLocation(_ location: CLLocation, completion: @escaping (Address) -> Void)
+    func fetchAddressFromLocation(_ location: CLLocation, completion: @escaping (String) -> Void)
+}
+
+class GeocodeService: IGeocodeService {
     
-    var geoCoder = CLGeocoder()
-    
+    private var geoCoder = CLGeocoder()
+
     func fetchLocationFromAddress(_ addressText: String, completion: @escaping (CLLocation) -> Void) {
         
         let addressString = addressText
@@ -20,7 +26,7 @@ class GeocodeService {
                 print("Geocoding error: \(error.localizedDescription)")
                 return
             }
-            
+
             guard let placemark = placemarks?.first else {
                 print("No placemarks found")
                 return
@@ -38,7 +44,10 @@ class GeocodeService {
         geoCoder.reverseGeocodeLocation(location, preferredLocale: Locale(identifier: "ru_RU")) { placemarks, error in
             
             if let place = placemarks?.first {
-                let address = Address(city: "\(place.administrativeArea ?? "") \(place.locality ?? "")", street: place.thoroughfare ?? " ", numberOfBuilding: Int(place.subThoroughfare ?? "") ?? 0, numberOfFlat: 0, floor: 0, enter: 0, code: " ", commentary: " ", isSelected: true)
+
+
+
+                let address = Address(city: "\(place.locality ?? "")", street: place.thoroughfare ?? " ", numberOfBuilding: place.subThoroughfare ?? "", numberOfFlat: 0, floor: 0, enter: 0, code: " ", commentary: " ", isSelected: true)
                 
                 completion(address)
             }
@@ -51,24 +60,12 @@ class GeocodeService {
             
             if let place = placemarks?.first {
                 
-                print(place.country)
-                print(place.administrativeArea)
-                print(place.locality)
-                
-                print(place.name) //Манеж
-                print(place.subAdministrativeArea)
-                print(place.subLocality) //Tverskoy District
-                print(place.thoroughfare) //Манежная улица
-                print(place.subThoroughfare) //номер дома
-                
-                
                 var address: [String] = []
                 
-                if let locality = place.locality { //
+                if let locality = place.locality {
                     address += [locality]
                 }
-                
-                
+
                 if let thoroughfare = place.thoroughfare {
                     address += [thoroughfare]
                 }
@@ -80,9 +77,6 @@ class GeocodeService {
                 let result = address.joined(separator: ", ")
                 
                 completion(result)
-                
-                
-                print("->", result)
             }
         }
     }

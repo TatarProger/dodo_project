@@ -18,7 +18,7 @@ class PersonalOffersContainerCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    lazy var collectioView: UICollectionView = {
+    private lazy var collectioView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 25
@@ -33,16 +33,14 @@ class PersonalOffersContainerCell: UITableViewCell {
         return collection
     }()
     
-    let nameLabel: UILabel = {
+    private let nameLabel: UILabel = {
         let label = UILabel()
         label.text = "Персональные предложения"
         label.textColor = .black
         label.font = UIFont(name: "Dodo Rounded", size: 25)
-        //label.font = UIFont.systemFont(ofSize: 5)
         return label
     }()
 }
-
 
 extension PersonalOffersContainerCell: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -53,21 +51,17 @@ extension PersonalOffersContainerCell: UICollectionViewDataSource, UICollectionV
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PersonalOffersCell.reuseId, for: indexPath) as! PersonalOffersCell
         return cell
     }
-    
-    
 }
 
-
 extension PersonalOffersContainerCell {
-    func setupViews() {
+    private func setupViews() {
         contentView.addSubview(collectioView)
         contentView.addSubview(nameLabel)
     }
     
-    func setupConstraints() {
+    private func setupConstraints() {
         nameLabel.snp.makeConstraints { make in
             make.top.left.equalTo(contentView).inset(5)
-            
         }
         
         collectioView.snp.makeConstraints { make in

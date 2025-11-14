@@ -132,7 +132,8 @@ class AddressAddViewController: UIViewController {
     @objc func saveButtonTapped() {
         info = addressTextField.text!
         let infArr = info.components(separatedBy: " ")
-        let adress = Address(city: infArr[0], street: infArr[1], numberOfBuilding: Int(infArr[2]) ?? 0, numberOfFlat: 0, floor: 0, enter: 0, code: " ", commentary: " ", isSelected: true)
+        print(infArr)
+        let adress = Address(city: infArr[0], street: infArr[1], numberOfBuilding: infArr[2], numberOfFlat: 0, floor: 0, enter: 0, code: " ", commentary: " ", isSelected: true)
         addressStorage.append(adress)
 
         print(addressStorage.fetch())

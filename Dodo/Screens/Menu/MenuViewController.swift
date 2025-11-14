@@ -8,35 +8,31 @@
 import UIKit
 import SnapKit
 
-final class MenuViewController: UIViewController {
+protocol IMenuViewController {
+    var presenter: IMenuPresenter? {get set}
     
-    private let categoryService: ICategoryService
-    private let productService: IProductService
-    let addressStorage = AddressStorage()
+    func navigateToDetailScreen(_ product: Product)
+    func navigateToMapScreen()
+    func navigateToProfile()
     
-    init(productService: IProductService, categoryService: ICategoryService) {
-        self.productService = productService
-        self.categoryService = categoryService
-        super.init(nibName: nil, bundle: nil)
-    }
+    func scrollToRow(_ indexPath: IndexPath)
+
+    func update(_ products: [Product])
+    func update(_ categories: [Category])
+    func update(_ address: String)
+}
+
+final class MenuViewController: UIViewController, IMenuViewController {
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    var presenter: IMenuPresenter?
     
-    var products: [Product] = [] {
-        didSet {
-            tableView.reloadData()
-        }
-    }
+    private var products: [Product] = []
     
-    var categories: [Category] = [] {
-        didSet {
-            tableView.reloadData()
-        }
-    }
+    private var deliveryAddress = ""
     
-    lazy  var tableView: UITableView = {
+    private var categories: [Category] = []
+    
+    private lazy  var tableView: UITableView = {
         let tableView = UITableView()
         tableView.backgroundColor = .systemBackground
         tableView.separatorColor = .systemBackground
@@ -64,41 +60,41 @@ final class MenuViewController: UIViewController {
         
         setupViews()
         setupConstraints()
-        fetchProducts()
-        fetchCategories()
+        presenter?.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        presenter?.viewWillAppear()
+    }
+    
+    
+}
+
+
+//MARK: Display Logic
+extension MenuViewController {
+    func update(_ products: [Product]) {
+        self.products = products
+        tableView.reloadData()
+        
+    }
+    func update(_ categories: [Category]) {
+        self.categories = categories
+        tableView.reloadData()
+    }
+    
+    func update(_ address: String) {
+        self.deliveryAddress = address
+        tableView.reloadData()
+    }
+    func scrollToRow(_ indexPath: IndexPath) {
+        tableView.scrollToRow(at: indexPath, at: .top, animated: true)
     }
     
 }
 
-//MARK: - Business Logic
-extension MenuViewController {
-    
-    func fetchCategories() {
-        
-        categoryService.fetchCategories { result in
-            switch result {
-            case .success(let category):
-                
-                self.categories = category
-            case .failure(let error):
-                print(error)
-                
-            }
-        }
-    }
-    
-    func fetchProducts() {
-        productService.fetchProducts { result in
-            switch result {
-                
-            case .success(let product):
-                self.products = product
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
-}
+
 
 
 extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
@@ -136,8 +132,9 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
             case .productList:
                 let header = tableView.dequeHeader(headerClass: CategoriesContainerHeader.self)
                 header.update(categories)
+                
                 header.onButtonTapped = { section in
-                    tableView.scrollToRow(at: IndexPath(row: section, section: 3), at: .top, animated: true)
+                    self.categoryCellSelected(section)
                 }
                 return header
             default:
@@ -168,13 +165,15 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
             case .profileAddres:
                 
                 let cell = tableView.dequeuCell(indexPath) as ProfileAddresCell
-                cell.update(addressStorage.fetchDefaultAddress())
-                cell.onButtonTapped = {
-                    self.navigateToMapScreen()
+                cell.update(deliveryAddress)
+                
+                cell.onAddressButtonTapped = {
+                    self.addressButtonTapped()
                 }
-                cell.onButtonTapped2 = {
-                    self.navigateToProfile()
+                cell.onProfileButtonTapped = {
+                    self.profileButtonTapped()
                 }
+                cell.configure()
                 
                 return cell
             case .stories:
@@ -187,7 +186,7 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
                 cell.update(products)
                 
                 cell.onBannerSelected = { product, row in
-                    self.navigateToDetailScreen(product)
+                    self.bannerCellSelect(product)
                 }
                 
                 return cell
@@ -216,17 +215,40 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
         if let sectionType = MenuSections(rawValue: indexPath.section) {
             switch sectionType {
             case .productList:
-                print("cell selected")
-                let product = products[indexPath.row]
-                print(indexPath.section, "section")
-                print(indexPath.row, "row")
-                navigateToDetailScreen(product)
+                productCellSelect(indexPath.row)
                 
             default:
                 break
             }
         }
     }
+}
+
+//MARK: Event Handler
+extension MenuViewController {
+    
+    private func productCellSelect(_ rowIndex: Int) {
+        let product = products[rowIndex]
+        presenter?.productCellSelect(product)
+    }
+    
+    private func bannerCellSelect(_ product: Product) {
+        presenter?.bannerCellSelect(product)
+    }
+    
+    private func profileButtonTapped() {
+        presenter?.profileButtonTapped()
+    }
+    
+    private func addressButtonTapped() {
+        presenter?.addressButtonTapped()
+    }
+    
+    private func categoryCellSelected(_ section: Int) {
+        let indexPath = IndexPath(row: section, section: 3)
+        presenter?.categoryCellSelected(indexPath)
+    }
+    
 }
 
 //MARK: Navigation
@@ -237,7 +259,7 @@ extension MenuViewController {
     }
     
     func navigateToMapScreen() {
-        let mapController = ScreenFactory().makeMapScreen()
+        let mapController = di.screenFactory.makeMapScreen()
         present(mapController, animated: true)
     }
     

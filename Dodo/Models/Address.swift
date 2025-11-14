@@ -10,10 +10,11 @@
 //static - reusable
 
 import Foundation
+
 struct Address: Codable{
     let city: String
     let street: String
-    let numberOfBuilding: Int
+    let numberOfBuilding: String
     let numberOfFlat: Int
     let floor: Int
     let enter: Int

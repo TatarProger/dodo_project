@@ -8,17 +8,21 @@
 import UIKit
 import CoreLocation
 
-class LocationService: NSObject {
-    
-    var locationManager = CLLocationManager()
+protocol ILocationService {
+    func fetchCurrentLocation(completion: @escaping (CLLocation) -> Void)
+}
+
+class LocationService: NSObject, ILocationService {
+
+    private var locationManager = CLLocationManager()
     var onLocationFetched: ((CLLocation) -> Void)?
-    
+
     override init() {
         super.init()
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
     }
-    
+
     func fetchCurrentLocation(completion: @escaping (CLLocation) -> Void) {
         locationManager.startUpdatingLocation()
         onLocationFetched = completion

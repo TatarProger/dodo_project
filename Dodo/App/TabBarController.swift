@@ -6,8 +6,12 @@
 //
 
 import UIKit
-class TabBarController: UITabBarController {
-    let menuViewController: MenuViewController = {
+
+final class TabBarController: UITabBarController {
+
+    private let featureToggleStorage = FeatureToggleStorage()
+
+    private let menuViewController: MenuViewController = {
         let controller = di.screenFactory.makeMenuScreen()
         let tabItem = UITabBarItem(
             title: "Меню",
@@ -18,7 +22,7 @@ class TabBarController: UITabBarController {
         return controller
     }()
 
-    let shoppingCartViewController: CartViewController = {
+    private let shoppingCartViewController: CartViewController = {
         let controller = di.screenFactory.makeCartScreen()
         let tabItem = UITabBarItem(title: "Корзина", image: UIImage(systemName: "cart"), selectedImage: UIImage(systemName: "cart.fill"))
         controller.tabBarItem = tabItem
@@ -27,17 +31,27 @@ class TabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        setupTabBarAppeareance()
+        tabbarListPick()
+    }
+
+    private func setupTabBarAppeareance() {
         let appearance = UITabBarAppearance()
         UITabBar.appearance().tintColor = UIColor.black
         appearance.backgroundColor = .white
         appearance.stackedLayoutAppearance.normal.iconColor = .lightGray
         appearance.stackedLayoutAppearance.selected.iconColor = .black
-        
         tabBar.standardAppearance = appearance
-        viewControllers = [menuViewController, shoppingCartViewController]
+    }
+
+    private func tabbarListPick() {
+        if LocalFeatureToggles.isCartAvalibale && RemoteFeatureToggles.isCartAvailable {
+            viewControllers = [menuViewController, shoppingCartViewController]
+        }
+        else {
+            viewControllers = [menuViewController]
+        }
     }
 
 }
-
-

@@ -7,7 +7,17 @@
 
 import Foundation
 
-final class AddressStorage {
+protocol IAdressStorage {
+    func fetchSelectedAddress() -> String
+    func fetch() -> [Address]
+    func remove(_ address: Address)
+    func append(_ address: Address)
+    func deselect() -> [Address]
+    func select(index: Int) -> [Address]
+
+}
+
+final class AddressStorage: IAdressStorage {
     
     private let key = "AddressStorage"
     
@@ -25,8 +35,8 @@ final class AddressStorage {
 
 //MARK: Private
 extension AddressStorage {
-    func save(_ Addresses: [Address]) {
-        do{
+    private func save(_ Addresses: [Address]) {
+        do {
             let data = try encode.encode(Addresses)
             userDefaults.set(data, forKey: key)
         } catch {
@@ -37,12 +47,15 @@ extension AddressStorage {
 
 //MARK: Public
 extension AddressStorage {
-    func fetchDefaultAddress() -> String {
+    func fetchSelectedAddress() -> String {
         let array = fetch()
-        if !array.isEmpty {
-            return array[0].fullAddress
+
+        for address in array {
+            if address.isSelected {
+                return address.fullAddress
+            }
         }
-        
+
         return "Адрес не установлен"
     }
     
@@ -77,9 +90,6 @@ extension AddressStorage {
             return
         }
         
-        //$0 - short hand param
-        //condition?true:false - ternary operator
-        
         guard !addresses.contains(address) else { 
             
             addresses.removeAll {$0 == address}
@@ -88,12 +98,43 @@ extension AddressStorage {
             save(addresses)
             
             return
-        }  //early exit operator
+        }
         
         addresses = addresses.map { return $0.isSelected ? $0.toggleSelected : $0 }
         
         addresses.insert(address, at: 0)
         
         save(addresses)
+    }
+
+    func deselect() -> [Address] {
+        var addresses = fetch()
+
+        for index in 0..<addresses.count {
+            if addresses[index].isSelected {
+                addresses[index] = addresses[index].toggleSelected
+            }
+        }
+        print(addresses.map{$0.isSelected})
+
+        save(addresses)
+        return addresses
+    }
+
+    func select(index: Int) -> [Address] {
+        var addresses = deselect()
+
+        addresses[index] = addresses[index].toggleSelected
+
+        save(addresses)
+        print(addresses.map{$0.isSelected})
+
+        NotificationCenter.default.post(
+            name: .addressChanged,
+            object: nil,
+            userInfo: ["address": addresses[index].fullAddress] 
+        )
+
+        return addresses
     }
 }

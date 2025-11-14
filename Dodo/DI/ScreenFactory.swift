@@ -6,18 +6,25 @@
 //
 
 import Foundation
-//protocol IScreenFactory {
-//    
-//    func makeMenuScreen() -> MenuViewController
-//}
 
-class ScreenFactory {
+protocol IScreenFactory {
+    func makeMenuScreen() -> MenuViewController
+    func makeCartScreen() -> CartViewController
+    func makeDetailProductScreen(_ product: Product) -> DetailProductController
+    func makeMapScreen() -> MapViewController
+}
+
+class ScreenFactory: IScreenFactory {
     
     weak var di: DI!
 
     func makeMenuScreen() -> MenuViewController {
+        let menuVC = MenuViewController()
+        let presenter = MenuPresenter(productService: di.productService, categoryService: di.categoryService, addressStorage: di.addressStorage, featureToggleStorage: di.featureToggleStorage)
         
-        let menuVC = MenuViewController(productService: di.productService, categoryService: di.categoryService)
+        menuVC.presenter = presenter
+        presenter.view = menuVC
+
         return menuVC
     }
     
@@ -33,7 +40,7 @@ class ScreenFactory {
     }
     
     func makeMapScreen() -> MapViewController {
-        let mapVC = MapViewController()
+        let mapVC = MapViewController(locationService: di.locationService, geocodeService: di.geocodeService, addressStorage: di.addressStorage)
         return mapVC
     }
 }
